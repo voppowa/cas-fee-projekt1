@@ -1,0 +1,74 @@
+/***************************
+New Note Style
+ **************************/
+
+main h3 {
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+.new_task {
+    background-color: #FFF;
+    border: 0.5px solid lightgrey;
+    border-top-color: #4ec8af;
+    border-top-width: 1rem;
+    width: 90%;
+    margin: 1rem auto;
+    padding: 1rem;
+    text-align: left;
+}
+
+form div + div {
+    margin-top: 1.5em;
+}
+
+label {
+    text-align: left;
+}
+
+input, textarea {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    color: dimgrey;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #999;
+}
+
+input {
+    height: 3rem;
+}
+
+textarea {
+    height: 12rem;
+}
+
+.new_task button {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    color: white;
+    margin: 0.5rem;
+    padding: 0.45rem 0.75rem;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.new_task button a {
+    text-decoration: none;
+    color: white;
+}
+
+.new_task button:hover {
+    opacity: 0.5;
+}
+
+.cancel {
+    background-color: #f19280;
+}
+
+.save {
+    background-color: #4ec8af;
+}
+
+
+

@@ -1,0 +1,189 @@
+/***************************
+General Style
+ **************************/
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    color: dimgrey;
+    background-color: #efede0;
+}
+
+
+
+/***************************
+Header Style
+ **************************/
+
+header h1 {
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.intro{
+    font-style: italic;
+    font-weight: 200;
+}
+
+header {
+    padding: 2rem;
+}
+
+
+
+/***************************
+Button Change Style & New Note
+ **************************/
+
+.btn_change {
+    color: white;
+    background-color: grey;
+    border: none;
+    border-radius: 2px;
+    padding: 0.5rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.btn_change:hover {
+    background-color: dimgrey;
+}
+
+.btn_new_task {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 200;
+    background-color: #4ec8af;
+    padding: 0.5rem 1.5rem;
+    border-radius: 3px;
+    border: none;
+}
+
+.btn_new_task:hover {
+    background-color: seagreen;
+}
+
+.btn_new_task a {
+    text-decoration: none;
+    color: white;
+}
+
+
+
+/***************************
+Sort Style
+ **************************/
+
+.sort {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sort li {
+    margin: 1rem 0;
+}
+
+.sort button {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    background-color: darkgray;
+    color: white;
+    padding: 0.5rem 2rem;
+    margin: 0;
+    border: none;
+}
+
+.sort button:hover {
+    color: darkgray;
+    background-color: floralwhite;
+}
+
+.finished_notes button {
+    background-color: #f19280;
+    text-align: right;
+}
+
+.finished_notes button:hover {
+    background-color: crimson;
+    color: white;
+}
+
+
+
+/***************************
+Tasks Style
+ **************************/
+
+.tasks {
+    list-style-type: none;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.task {
+    background-color: #FFF;
+    width: 100%;
+    margin: 1rem auto;
+    border: 0.5px solid lightgrey;
+}
+
+.task-title, .task-description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.task-title {
+    border-top-color: #4ec8af;
+    border-top-style: solid;
+    border-top-width: 1rem;
+}
+
+.task-title h3 {
+    font-size: 1.5rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    color: darkslategray;
+}
+
+.task-title p {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem;
+}
+
+.task-text {
+    font-weight: 300;
+    text-align: left;
+    padding: 0 1.5rem;
+}
+
+.edit {
+    text-transform: uppercase;
+    color: white;
+    background-color: darkgray;
+    border: none;
+    height: 2rem;
+}
+
+.edit:hover {
+    background-color: darkslategray;
+}
+
+label[for="finished"] {
+    font-style: italic;
+    padding: 1rem;
+}
+
+.fa-bolt {
+    color: darkorange;
+    font-size: 3rem;
+    padding: 1rem;
+}
+
+
