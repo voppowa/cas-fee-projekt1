@@ -6,14 +6,10 @@ body {
     font-family: 'Quicksand', sans-serif;
     text-align: center;
     color: dimgrey;
-    background-image: url(https://unsplash.it/5000/2500/?random);
-    background-size: cover;
+    background-color: #efede0;
 }
 
-.container {
-    background-color: rgba(239,237,224, 0.9);
-    border-radius: 3px;
-}
+
 
 /***************************
 Header Style
@@ -23,18 +19,16 @@ header h1 {
     text-transform: uppercase;
     font-weight: 500;
     font-size: 3rem;
-    font-family: 'Lora', serif;
 }
 
 .intro{
     font-style: italic;
     font-weight: 200;
-    font-size: 1.1rem;
-    margin: 3rem;
+    font-size: 1.25rem;
 }
 
 header {
-    padding: 1rem;
+    padding: 2rem;
 }
 
 #numberOfElements {
@@ -54,7 +48,6 @@ Button Change Style & New Note
     position: absolute;
     top: 1rem;
     right: 1rem;
-    cursor: pointer;
 }
 
 .btn_change:hover {
@@ -88,7 +81,7 @@ Sort Style
 
 .sort {
     list-style-type: none;
-    padding: 1rem;
+    padding: 0;
 }
 
 .sort li {
@@ -105,7 +98,6 @@ Sort Style
     padding: 0.5rem 2rem;
     margin: 0;
     border: none;
-    cursor: pointer;
 }
 
 .sort button:hover, .sort button:focus {
@@ -134,13 +126,14 @@ Tasks Style
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 0;
 }
 
 .task {
     background-color: #FFF;
     border: 0.5px solid lightgrey;
     margin: 0.5rem 0;
+
 }
 
 .task-title, .task-description {
@@ -162,7 +155,7 @@ Tasks Style
     color: darkslategray;
 }
 
-.deadline {
+#deadline {
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.5rem;
@@ -201,7 +194,6 @@ Tasks Style
     border: 1px solid #cacece;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
     padding: 9px;
-    margin: 1.5rem;
     border-radius: 3px;
     display: inline-block;
     position: relative;
@@ -215,14 +207,15 @@ Tasks Style
     background-color: #e9ecee;
     border: 1px solid #adb8c0;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-    color: darkslategray;
+    color: #99a1a7;
 }
 
 #finished:checked:after {
     content: '\2714';
     font-size: 14px;
     position: absolute;
-    top: 2px;
+    top: 0px;
+    left: 3px;
     color: #99a1a7;
 }
 

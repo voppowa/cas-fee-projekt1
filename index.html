@@ -1,85 +1,71 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+    <html>
+        <head>
+            <link id="pagestyle" rel="stylesheet" href="css/style.css">
+            <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Lora|Quicksand:400,500" rel="stylesheet">
 
-        <title>Note Pro</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
+            <title>Note Pro</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width">
+        </head>
 
-    </head>
-    <body>
-        <button class="btn_change">Change Style</button>
-        <header>
-            <h1>Welcome to your To Do List</h1>
-            <p class="intro">A easy and simple way to organise your work. Priotize, create or edit your tasks.</p>
-        </header>
+        <body>
+        <div class="container">
+            <button type="button" onclick="toggle()" class="btn_change">Change Style</button>
 
-        <button class="btn_new_task"><a href="new.html">+ New Task</a></button>
-        <ul class="sort">
-            <li><button>By finish Date</button></li>
-            <li><button>By created Date</button></li>
-            <li><button>By Importance</button></li>
-            <li class="finished_notes"><button>Finished</button></li>
-        </ul>
+            <header>
+                <h1>Welcome to your To Do List</h1>
+                <p class="intro">A easy and simple way to organise your work. Priotize, create or edit your tasks.</p>
+                <p>You have<div id="numberOfElements"></div>Tasks</p>
+            </header>
 
-        <main>
-            <ul class="tasks">
-                <li class="task">
-                    <div class="task-title">
-                        <p>Tomorrow</p>
-                        <h3>Task Title</h3>
-                        <i class="fa fa-bolt fa-2x" aria-hidden="true"></i>
-                    </div>
-                    <div class="task-description">
-                        <label for="finished">
-                            Finished
-                            <input type="checkbox" id="finished" value="finished">
-                        </label>
-                        <p class="task-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae dolore exercitationem id iusto laudantium, maxime obcaecati, officiis rem saepe, sed tempora vel veritatis. Accusamus accusantium animi fugiat nam necessitatibus?
-                        </p>
-                        <button class="edit">Edit</button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-title">
-                        <p>Tomorrow</p>
-                        <h3>Task Title</h3>
-                        <i class="fa fa-bolt fa-2x" aria-hidden="true"></i>
-                    </div>
-                    <div class="task-description">
-                        <label for="finished">
-                            Finished
-                            <input type="checkbox" id="finished" value="finished">
-                        </label>
-                        <p class="task-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae dolore exercitationem id iusto laudantium, maxime obcaecati, officiis rem saepe, sed tempora vel veritatis. Accusamus accusantium animi fugiat nam necessitatibus?
-                        </p>
-                        <button class="edit">Edit</button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-title">
-                        <p>Tomorrow</p>
-                        <h3>Task Title</h3>
-                        <i class="fa fa-bolt fa-2x" aria-hidden="true"></i>
-                    </div>
-                    <div class="task-description">
-                        <label for="finished">
-                            Finished
-                            <input type="checkbox" id="finished" value="finished">
-                        </label>
-                        <p class="task-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae dolore exercitationem id iusto laudantium, maxime obcaecati, officiis rem saepe, sed tempora vel veritatis. Accusamus accusantium animi fugiat nam necessitatibus?
-                        </p>
-                        <button class="edit">Edit</button>
-                    </div>
-                </li>
+            <button class="btn_new_task"><a href="new.html">+ New Task</a></button>
+
+            <ul class="sort">
+                <li><button>By finish Date</button></li>
+                <li><button>By created Date</button></li>
+                <li><button>By Importance</button></li>
+                <li class="finished_notes"><button>Finished</button></li>
             </ul>
-        </main>
 
-    </body>
+            <main>
+
+                <script id="task" type="text/x-handlebars-template">
+
+                    <ul class="tasks">
+                        {{#tasks}}
+                        <li class="task">
+                            <div class="task-title">
+                                <p class="deadline">{{this.deadline}}</p>
+                                <h3>{{this.title}}</h3>
+                                <div class="importance">
+                                    {{this.importance}}
+                                </div>
+                            </div>
+                            <div class="task-description">
+                                <div class="action">
+                                    <button class="edit">Edit</button>
+                                    <button class="remove">Remove</button>
+                                </div>
+                                <p class="task-text">{{this.description}}</p>
+                                <label for="finished">
+                                    <input type="checkbox" id="finished" value="finished">
+                                </label>
+                            </div>
+                        </li>
+                        {{/tasks}}
+                    </ul>
+
+                </script>
+                <div id="task-wrapper"></div>
+
+            </main>
+        </div>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
+            <script src="JavaScript/index.js"></script>
+        </body>
 </html>

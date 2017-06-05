@@ -3,7 +3,14 @@ MEDIA QUERIES
  **************************************/
 
 @media (min-width: 789px) {
+    /***************************
+    General Style
+     **************************/
 
+    html .container {
+        width: 50%;
+        margin: 5rem auto;
+    }
 
     /***************************
     Header Style
@@ -25,12 +32,11 @@ MEDIA QUERIES
     Tasks Style
      **************************/
 
-     main .tasks {
-         width: 60%;
-     }
+
 
      main .task {
-        width: 60%;
+         margin: 1rem auto;
+         width: 60%;
      }
 
      /***************************
@@ -40,6 +46,15 @@ MEDIA QUERIES
     main .new_task {
         width: 30%;
         padding: 2rem;
+    }
+
+
+
+}
+
+@media (min-width: 1083px) {
+    main .task {
+        width: 75%;
     }
 
 
