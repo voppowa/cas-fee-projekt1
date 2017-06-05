@@ -60,10 +60,12 @@ tasks = JSON.parse(tasks);
         renderPage();
     })
 
-    // Show finished Tasks
+    // TODO: Click on Finished
 
 
-    // Click on Finished
+    // TODO: Show finished Tasks
+
+
 
 
 })();
@@ -76,16 +78,22 @@ listUl.addEventListener('click', (event) => {
         if (event.target.className == 'remove') {
             const li = event.target.parentNode.parentNode.parentNode;
             const ul = li.parentNode;
-            console.log(li);
+            const nameOfTask = $(this).parent('li').clone().children().remove().end().text().trim();
+            const index = tasks.indexOf(nameOfTask);
+            tasks.splice(index,1);
             ul.removeChild(li);
             document.getElementById("numberOfElements").innerText = tasks.length == 0 ? "no" : tasks.length;
+            console.log(tasks);
         }
     }
 });
 
 
+// TODO: Edit Task
 
 
+
+// TODO: Add Importance Bolts to Task
 
 
 
