@@ -25,7 +25,7 @@
                 <textarea id="description" name="task_description"></textarea>
             </div>
             <div>
-                <label for="importance">Importance</label><br>
+                <label for="importance">Importance<span class="required">*</span></label><br>
                 <div class="rating gold" id="importance">
                     <div value="5"></div>
                     <div value="4"></div>
@@ -33,6 +33,7 @@
                     <div value="2"></div>
                     <div value="1"></div>
                 </div>
+                <input type="hidden" id="hiddenImportance" value="" name="importance" />
             </div>
             <div>
                 <label for="deadline">Deadline<span class="required">*</span></label>

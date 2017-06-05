@@ -24,9 +24,9 @@
             <button class="btn_new_task"><a href="new.html">+ New Task</a></button>
 
             <ul class="sort">
-                <li><button>By finish Date</button></li>
-                <li><button>By created Date</button></li>
-                <li><button>By Importance</button></li>
+                <li><button class="deadlineDate">By finish Date</button></li>
+                <li><button class="creationDate">By created Date</button></li>
+                <li><button class="taskImportance">By Importance</button></li>
                 <li class="finished_notes"><button>Finished</button></li>
             </ul>
 
@@ -41,7 +41,6 @@
                                 <p class="deadline">{{this.deadline}}</p>
                                 <h3>{{this.title}}</h3>
                                 <div class="importance">
-                                    {{this.importance}}
                                 </div>
                             </div>
                             <div class="task-description">

@@ -5,30 +5,33 @@ function send() {
     let addTask = function (title, description, deadline) {
 
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        let creationDate = new Date();
         let newTask = {
+            'creationDate': creationDate,
             'title': document.getElementById("title").value,
             'description': document.getElementById("description").value,
+            'importance': document.getElementById("hiddenImportance").value,
             'deadline': document.getElementById("deadline").value,
-        };
+            'isFinished': false
+    };
 
 
         tasks.push(newTask);
         localStorage.setItem('tasks', JSON.stringify(tasks));
     };
 
-    addTask('title', 'description', 'deadline');
+    addTask('creationDate', 'title', 'description', 'importance', 'deadline', 'isFinished');
     window.location.replace("index.html");
 }
-
 
 // Importance Rating
 function StarRating() {
     this.init();
-};
+}
 
-StarRating.prototype.init = function() {
+StarRating.prototype.init = function () {
     this.stars = document.querySelectorAll('.rating div');
-    for (var i = 0; i < this.stars.length; i++) {
+    for (let i = 0; i < this.stars.length; i++) {
         this.stars[i].setAttribute('data-count', i);
         this.stars[i].addEventListener('mouseenter', this.enterStarListener.bind(this));
     }
@@ -36,19 +39,19 @@ StarRating.prototype.init = function() {
 
 };
 
-StarRating.prototype.enterStarListener = function(e) {
+StarRating.prototype.enterStarListener = function (e) {
     this.fillStarsUpToElement(e.target);
 };
 
 
-StarRating.prototype.leaveStarListener = function() {
+StarRating.prototype.leaveStarListener = function () {
     this.fillStarsUpToElement(null);
 };
 
 
-StarRating.prototype.fillStarsUpToElement = function(el) {
+StarRating.prototype.fillStarsUpToElement = function (el) {
     // Remove all hover states:
-    for (var i = 0; i < this.stars.length; i++) {
+    for (let i = 0; i < this.stars.length; i++) {
         if (el == null || this.stars[i].getAttribute('data-count') < el.getAttribute('data-count')) {
             this.stars[i].classList.remove('hover');
         } else {
@@ -66,10 +69,10 @@ $('.rating div').addClass('bolt');
 
 
 // When star is clicked
-$('.bolt').click(function(){
+$('.bolt').click(function () {
 
     // if star doesn't have class selected
-    if (this+":not(.selected)"){
+    if (this + ":not(.selected)") {
 
         // selected star gets class
         $('.bolt').removeClass('selected');
@@ -77,8 +80,9 @@ $('.bolt').click(function(){
 
 
         // selected star id
-        var starId = $(this).attr('value');
+        const starId = $(this).attr('value');
         console.log(starId);
+        document.getElementById('hiddenImportance').value = starId;
     }
 });
 
