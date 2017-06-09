@@ -2,7 +2,6 @@
 
 $(document).on('click', '#save', () => send());
 
-
 function send() {
 
     let addTask = function (title, description, deadline) {
@@ -25,6 +24,7 @@ function send() {
     window.location.replace("index.html");
 }
 
+
 // Importance Rating
 function StarRating() {
     this.init();
@@ -33,10 +33,10 @@ function StarRating() {
 StarRating.prototype.init = function () {
     this.stars = $('.rating div');
     for (let i = 0; i < this.stars.length; i++) {
-        this.stars[i].setAttribute('data-count', i);
-        this.stars[i].addEventListener('mouseenter', this.enterStarListener.bind(this));
+        $(this.stars[i]).attr('data-count', i);
+        $(this.stars[i]).on('mouseenter', this.enterStarListener.bind(this));
     }
-    document.querySelector('.rating').addEventListener('mouseleave', this.leaveStarListener.bind(this));
+    $('.rating').on('mouseleave', this.leaveStarListener.bind(this));
 
 };
 
@@ -53,7 +53,7 @@ StarRating.prototype.leaveStarListener = function () {
 StarRating.prototype.fillStarsUpToElement = function (el) {
     // Remove all hover states:
     for (let i = 0; i < this.stars.length; i++) {
-        if (el == null || this.stars[i].getAttribute('data-count') < el.getAttribute('data-count')) {
+        if (el == null || $(this.stars[i]).attr('data-count') < $(el).attr('data-count')) {
             this.stars[i].classList.remove('hover');
         } else {
             this.stars[i].classList.add('hover');
@@ -64,9 +64,7 @@ StarRating.prototype.fillStarsUpToElement = function (el) {
 // Run:
 new StarRating();
 
-//
 $('.rating div').addClass('bolt');
-
 
 // When star is clicked
 $('.bolt').click(function () {
@@ -82,7 +80,6 @@ $('.bolt').click(function () {
         // selected star id
         const starId = $(this).attr('value');
         console.log(starId);
-        document.getElementById('hiddenImportance').value = starId;
+        $('#hiddenImportance').val(starId);
     }
 });
-
