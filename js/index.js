@@ -1,12 +1,4 @@
-// Change Style
-function toggle() {
-    const a = document.getElementById("pagestyle");
-    a.x = 'style_v2' == a.x ? 'style' : 'style_v2';
-    a.href = 'css/' + a.x + '.css';
-}
-
-
-// Add new Task
+// Tasks
 let tasks = localStorage.getItem("tasks");
 
 if( !tasks )
@@ -16,7 +8,13 @@ if( !tasks )
 }
 tasks = JSON.parse(tasks);
 
-(function () {
+
+
+;(function ($) {
+
+    $(function(){
+
+    });
 
     function renderPage() {
 
@@ -29,74 +27,99 @@ tasks = JSON.parse(tasks);
         console.log(tasks);
         $('#task-wrapper').html(compiled);
 
+        let numberTasks = tasks.length == 0 ? "no" : tasks.length;
+        $("#numberOfElements").text(numberTasks);
+
     }
     renderPage();
 
+    function renderPageFinishedTasks() {
 
-    // Amount of Tasks
-    document.getElementById("numberOfElements").innerText = tasks.length == 0 ? "no" : tasks.length;
+        const templateScript = $('#finished_task').html(),
+            handlebarTpl = Handlebars.compile(templateScript),
+            context = {
+                tasks
+            },
+            compiled = handlebarTpl(context);
+        console.log(tasks);
+        $('#task-wrapper').html(compiled);
 
-    // Sort Tasks By Creation Date
-    $(document).on('click', '.creationDate', function() {
-        tasks.sort(function(a,b){
-            return new Date(b.creationDate) - new Date(a.creationDate);
-        });
-        renderPage();
-    })
+        let numberTasks = tasks.length == 0 ? "no" : tasks.length;
+        $("#numberOfElements").text(numberTasks);
 
-    // Sort Tasks By Deadline
-    $(document).on('click', '.deadlineDate', function() {
-        tasks.sort(function(a,b){
-            return new Date(a.deadline) - new Date(b.deadline);
-        });
-        renderPage();
-    })
-
-    // Sort Tasks By Importance
-    $(document).on('click', '.taskImportance', function() {
-        tasks.sort(function(a,b){
-            return b.importance - a.importance;
-        });
-        renderPage();
-    })
-
-    // TODO: Click on Finished
-
-
-    // TODO: Show finished Tasks
-
-
-
-
-})();
-
-// Delete Task
-const main = document.querySelector('main');
-const listUl = main.querySelector('ul');
-listUl.addEventListener('click', (event) => {
-    if (event.target.tagName == 'BUTTON') {
-        if (event.target.className == 'remove') {
-            const li = event.target.parentNode.parentNode.parentNode;
-            const ul = li.parentNode;
-            const nameOfTask = $(this).parent('li').clone().children().remove().end().text().trim();
-            const index = tasks.indexOf(nameOfTask);
-            tasks.splice(index,1);
-            ul.removeChild(li);
-            document.getElementById("numberOfElements").innerText = tasks.length == 0 ? "no" : tasks.length;
-            console.log(tasks);
-        }
     }
-});
+
+    // Style Changer
+    $(document).on('click', '#style_changer', () => changeStyle());
+
+    // Sort Functions
+    $(document).on('click', '.deadlineDate', () => sortAndRerender(sortByDeadline));
+    $(document).on('click', '.creationDate', () => sortAndRerender(sortByCreationDate));
+    $(document).on('click', '.taskImportance', () => sortAndRerender(sortByImportance));
+
+    // Remove Task
+    $(document).on('click', '.remove', () => removeTask());
+    $(document).on('click', '.finished', () => finishedTask());
+
+    // Show Finished
+    $(document).on('click', '.finished_notes', () => showFinished());
+
+    // Edit Task
+    $(document).on('click', '.edit', () => editTask());
 
 
-// TODO: Edit Task
+    function changeStyle() {
+        $('body').toggleClass('change_style');
+    }
+
+    function sortAndRerender(sortAlgo) {
+        tasks.sort(sortAlgo);
+        renderPage();
+    }
+
+    function sortByDeadline(a,b){
+        return new Date(a.deadline) - new Date(b.deadline);
+    }
+
+    function sortByCreationDate(a,b){
+        return new Date(a.creationDate) - new Date(b.creationDate);
+    }
+
+    function sortByImportance(a,b){
+        return b.importance - a.importance;
+    }
+
+    function removeTask(){
+        $(this).parent().parent().parent().remove();
+        const nameOfTask = $(this).parent('li').clone().children().remove().end().text().trim();
+        const index = tasks.indexOf(nameOfTask);
+        tasks.splice(index,1);
+        renderPage();
+    }
+
+    function finishedTask() {
+        const title = event.target.parentNode.parentNode.parentNode.firstElementChild.firstElementChild.nextElementSibling.innerHTML;
+        const index = tasks.findIndex(x => x.title==title);
+        tasks[index].isFinished = true;
+        tasks.splice(index,1);
+        renderPage();
+    }
+
+    function showFinished() {
+        renderPageFinishedTasks();
+    }
+
+    // TODO: Edit Task
+    function editTask() {
 
 
-
-// TODO: Add Importance Bolts to Task
-
+    };
 
 
+    // TODO: Add Importance Bolts to Task
+
+
+})(jQuery);
 
 
 

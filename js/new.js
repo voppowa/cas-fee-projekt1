@@ -1,5 +1,8 @@
 // Send new Task
 
+$(document).on('click', '#save', () => send());
+
+
 function send() {
 
     let addTask = function (title, description, deadline) {
@@ -8,14 +11,12 @@ function send() {
         let creationDate = new Date();
         let newTask = {
             'creationDate': creationDate,
-            'title': document.getElementById("title").value,
-            'description': document.getElementById("description").value,
-            'importance': document.getElementById("hiddenImportance").value,
-            'deadline': document.getElementById("deadline").value,
+            'title': $("#title").val(),
+            'description': $("#description").val(),
+            'importance': $("#hiddenImportance").val(),
+            'deadline': $("#deadline").val(),
             'isFinished': false
     };
-
-
         tasks.push(newTask);
         localStorage.setItem('tasks', JSON.stringify(tasks));
     };
@@ -30,7 +31,7 @@ function StarRating() {
 }
 
 StarRating.prototype.init = function () {
-    this.stars = document.querySelectorAll('.rating div');
+    this.stars = $('.rating div');
     for (let i = 0; i < this.stars.length; i++) {
         this.stars[i].setAttribute('data-count', i);
         this.stars[i].addEventListener('mouseenter', this.enterStarListener.bind(this));
@@ -59,7 +60,6 @@ StarRating.prototype.fillStarsUpToElement = function (el) {
         }
     }
 };
-
 
 // Run:
 new StarRating();
