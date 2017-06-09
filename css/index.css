@@ -6,7 +6,11 @@ body {
     font-family: 'Quicksand', sans-serif;
     text-align: center;
     color: dimgrey;
-    background-image: url(https://unsplash.it/5000/2500/?random);
+    background: #efede0;
+}
+
+.change_style {
+    background: url(https://unsplash.it/5000/2500/?image=974);
     background-size: cover;
 }
 
@@ -113,12 +117,12 @@ Sort Style
     background-color: floralwhite;
 }
 
-.finished_notes button {
+button.finished_notes {
     background-color: #f19280;
     text-align: right;
 }
 
-.finished_notes button:hover, .finished_notes button:focus {
+button.finished_notes:hover, button.finished_notes:focus {
     background-color: crimson;
     color: white;
 }
@@ -240,7 +244,7 @@ Tasks Style
 
 /*** Importance Bolts ***/
 
-.importance::before {
+.importance-bolts:after {
     font-size: 2rem;
     font-family: FontAwesome;
     content: "\f0e7";
@@ -249,4 +253,9 @@ Tasks Style
     cursor: pointer;
     transition: 0.3s;
     color: darkorange;
+}
+
+#importance {
+    display: flex;
+    flex-direction: row-reverse;
 }
