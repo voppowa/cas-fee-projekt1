@@ -13,7 +13,7 @@
 
         <body>
         <div class="container">
-            <button type="button" onclick="toggle()" class="btn_change">Change Style</button>
+            <button type="button" id="style_changer" class="btn_change">Change Style</button>
 
             <header>
                 <h1>Welcome to your To Do List</h1>
@@ -27,42 +27,69 @@
                 <li><button class="deadlineDate">By finish Date</button></li>
                 <li><button class="creationDate">By created Date</button></li>
                 <li><button class="taskImportance">By Importance</button></li>
-                <li class="finished_notes"><button>Finished</button></li>
+                <li><button class="finished_notes">Finished</button></li>
             </ul>
 
             <main>
 
-                <script id="task" type="text/x-handlebars-template">
 
-                    <ul class="tasks">
-                        {{#tasks}}
-                        <li class="task">
-                            <div class="task-title">
-                                <p class="deadline">{{this.deadline}}</p>
-                                <h3>{{this.title}}</h3>
-                                <div class="importance">
-                                </div>
-                            </div>
-                            <div class="task-description">
-                                <div class="action">
-                                    <button class="edit"><a href="new.html">Edit</a></button>
-                                    <button class="remove">Remove</button>
-                                </div>
-                                <p class="task-text">{{this.description}}</p>
-                                <label for="finished">
-                                    <input type="checkbox" id="finished" class="finished">
-                                </label>
-                            </div>
-                        </li>
-                        {{/tasks}}
-                    </ul>
-
-                </script>
                 <div id="task-wrapper"></div>
 
             </main>
         </div>
+            <script id="finished_task" type="text/x-handlebars-template">
+                <ul class="tasks">
+                    {{#tasks}}
+                    {{#if isFinished}}
+                    <li class="task">
+                        <div class="task-title">
+                            <p class="deadline">{{this.deadline}}</p>
+                            <h3>{{this.title}}</h3>
+                            <div id="importance">
+                                {{this.importance}}
+                            </div>
+                        </div>
+                        <div class="task-description">
+                            <div class="action">
+                                <button class="edit"><a href="new.html">Edit</a></button>
+                                <button class="remove">Remove</button>
+                            </div>
+                            <p class="task-text">{{this.description}}</p>
+                            <label for="finished">
+                                <input type="checkbox" id="finished" class="finished">
+                            </label>
+                        </div>
+                    </li>
+                    {{/if}}
+                    {{/tasks}}
+                </ul>
+            </script>
 
+            <script id="task" type="text/x-handlebars-template">
+                <ul class="tasks">
+                    {{#tasks}}
+                    <li class="task">
+                        <div class="task-title">
+                            <p class="deadline">{{this.deadline}}</p>
+                            <h3>{{this.title}}</h3>
+                            <div id="importance">
+                                {{this.importance}}
+                            </div>
+                        </div>
+                        <div class="task-description">
+                            <div class="action">
+                                <button class="edit"><a href="new.html">Edit</a></button>
+                                <button class="remove">Remove</button>
+                            </div>
+                            <p class="task-text">{{this.description}}</p>
+                            <label for="finished">
+                                <input type="checkbox" id="finished" class="finished">
+                            </label>
+                        </div>
+                    </li>
+                    {{/tasks}}
+                </ul>
+            </script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
             <script src="js/index.js"></script>
