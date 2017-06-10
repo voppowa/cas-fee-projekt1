@@ -8,30 +8,25 @@ if( !tasks )
 }
 tasks = JSON.parse(tasks);
 
-
-
 ;(function ($) {
-
-    $(function(){
-
-    });
 
     function renderPage() {
 
-            const templateScript = $('#task').html(),
-                handlebarTpl = Handlebars.compile(templateScript),
-                context = {
-                    tasks
-                },
-                compiled = handlebarTpl(context);
-        console.log(tasks);
+        const templateScript = $('#task').html(),
+            handlebarTpl = Handlebars.compile(templateScript),
+            context = {
+                tasks
+            },
+            compiled = handlebarTpl(context);
         $('#task-wrapper').html(compiled);
 
         let numberTasks = tasks.length == 0 ? "no" : tasks.length;
         $("#numberOfElements").text(numberTasks);
 
     }
+
     renderPage();
+
 
     function renderPageFinishedTasks() {
 
@@ -59,7 +54,7 @@ tasks = JSON.parse(tasks);
 
     // Remove Task
     $(document).on('click', '.remove', () => removeTask());
-    $(document).on('click', '.finished', () => finishedTask());
+    $(document).on('click', '#finished', () => finishedTask());
 
     // Show Finished
     $(document).on('click', '.finished_notes', () => showFinished());
@@ -77,31 +72,31 @@ tasks = JSON.parse(tasks);
         renderPage();
     }
 
-    function sortByDeadline(a,b){
+    function sortByDeadline(a, b) {
         return new Date(a.deadline) - new Date(b.deadline);
     }
 
-    function sortByCreationDate(a,b){
+    function sortByCreationDate(a, b) {
         return new Date(a.creationDate) - new Date(b.creationDate);
     }
 
-    function sortByImportance(a,b){
-        return b.importance - a.importance;
+    function sortByImportance(a, b) {
+        return b.importance.length - a.importance.length;
     }
 
-    function removeTask(){
-        $(this).parent().parent().parent().remove();
-        const nameOfTask = $(this).parent('li').clone().children().remove().end().text().trim();
-        const index = tasks.indexOf(nameOfTask);
-        tasks.splice(index,1);
+    function removeTask() {
+        const title = event.target.parentNode.parentNode.parentNode.firstElementChild.firstElementChild.nextElementSibling.innerHTML;
+        const index = tasks.findIndex(x => x.title == title);
+        tasks.splice(index, 1);
+        localStorage.removeItem(tasks[index]);
         renderPage();
     }
 
     function finishedTask() {
         const title = event.target.parentNode.parentNode.parentNode.firstElementChild.firstElementChild.nextElementSibling.innerHTML;
-        const index = tasks.findIndex(x => x.title==title);
+        const index = tasks.findIndex(x => x.title == title);
         tasks[index].isFinished = true;
-        tasks.splice(index,1);
+        tasks.splice(index, 1);
         renderPage();
     }
 
@@ -113,14 +108,9 @@ tasks = JSON.parse(tasks);
     function editTask() {
 
 
-    };
-
-
-    // TODO: Add Importance Bolts to Task
-
+    }
 
 })(jQuery);
-
 
 
 

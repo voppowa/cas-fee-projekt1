@@ -12,7 +12,7 @@ function send() {
             'creationDate': creationDate,
             'title': $("#title").val(),
             'description': $("#description").val(),
-            'importance': $("#hiddenImportance").val(),
+            'importance': Array.from({length: $("#hiddenImportance").val()}, (v, k) => k),
             'deadline': $("#deadline").val(),
             'isFinished': false
     };

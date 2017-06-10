@@ -248,14 +248,15 @@ Tasks Style
     font-size: 2rem;
     font-family: FontAwesome;
     content: "\f0e7";
-    padding: 1rem;
+    padding: 0.25rem;
     text-shadow: 0px 0px 2px grey;
     cursor: pointer;
     transition: 0.3s;
     color: darkorange;
 }
 
-#importance {
+.importance {
     display: flex;
     flex-direction: row-reverse;
 }
+
