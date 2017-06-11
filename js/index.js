@@ -60,7 +60,7 @@ tasks = JSON.parse(tasks);
     $(document).on('click', '.finished_notes', () => showFinished());
 
     // Edit Task
-    $(document).on('click', '.edit', () => editTask());
+    $(document).on('click', '.task-text', () => editTaskDescription());
 
 
     function changeStyle() {
@@ -104,11 +104,24 @@ tasks = JSON.parse(tasks);
         renderPageFinishedTasks();
     }
 
-    // TODO: Edit Task
-    function editTask() {
-
-
+    // Edit Task Description by clicking in the field
+    function editTaskDescription() {
+        console.log('edit clicked');
+        const editTaskDescription = event.target.parentNode.parentNode.firstElementChild.nextElementSibling.firstElementChild.nextElementSibling;
+        $(editTaskDescription).attr('contenteditable','true').addClass('active');
+        $(".task-text").on('keyup', function (e) {
+            if (e.keyCode == 13) {
+                const newText = $(editTaskDescription).text();
+                const title = event.target.parentNode.parentNode.firstElementChild.firstElementChild.nextElementSibling.innerHTML;
+                const index = tasks.findIndex(x => x.title == title);
+                tasks[index].description = newText;
+                $(editTaskDescription).attr('contenteditable','false').removeClass('active');
+            }
+        });
     }
+
+    // TODO: Edit Task
+
 
 })(jQuery);
 
