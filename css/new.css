@@ -36,6 +36,10 @@ input {
     height: 3rem;
 }
 
+input#deadline {
+    width: 25%;
+}
+
 textarea {
     height: 12rem;
 }
@@ -43,12 +47,9 @@ textarea {
 /*** Importance Rating ***/
 
 .rating {
-    width: 180px;
-    padding: 30px 50px 30px;
     display: flex;
     flex-direction: row-reverse;
     margin: 0px auto;
-    border-radius: 5px;
 }
 
 .rating div {
@@ -68,14 +69,12 @@ textarea {
 }
 
 .gold {
-    background: white;
     height: 40px;
     width: 185px;
     white-space: nowrap;
     margin-bottom: 4px;
     background-color: #fff;
-    padding: 0 16px;
-    border-radius: 3px;
+    padding: 1.5rem;
     cursor: pointer;
     line-height: 40px;
 }

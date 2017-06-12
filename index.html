@@ -43,13 +43,24 @@
                     {{#tasks}}
                     {{#if isFinished}}
                     <li class="task">
+                        <p class="uniqueID">{{this.taskID}}</p>
                         <div class="task-title">
                             <p class="deadline">{{this.deadline}}</p>
+                            <input type='date' id='deadline' class='index_hide' name='task_deadline' min='1979-12-31' required>
                             <h3>{{this.title}}</h3>
                             <div class="importance">
-                                {{#importance}}
-                                    <div class='importance-bolts'></div>
-                                {{/importance}}
+                                <div class="importance-container">
+                                    {{#importance}}
+                                        <div class='importance-bolts'></div>
+                                    {{/importance}}
+                                </div>
+                                <div class="gold index_hide" id="importance">
+                                    <div value="5"></div>
+                                    <div value="4"></div>
+                                    <div value="3"></div>
+                                    <div value="2"></div>
+                                    <div value="1"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="task-description">
@@ -72,13 +83,24 @@
                 <ul class="tasks">
                     {{#tasks}}
                     <li class="task">
+                        <p class="uniqueID">{{this.taskID}}</p>
                         <div class="task-title">
                             <p class="deadline">{{this.deadline}}</p>
+                            <input type='date' id='deadline' class='index_hide' name='task_deadline' min='1979-12-31' required>
                             <h3>{{this.title}}</h3>
                             <div class="importance">
-                                {{#importance}}
-                                    <div class='importance-bolts'></div>
-                                {{/importance}}
+                                <div class="importance-container">
+                                    {{#importance}}
+                                        <div class='importance-bolts'></div>
+                                    {{/importance}}
+                                </div>
+                                <div class="gold index_hide" id="importance">
+                                    <div value="5"></div>
+                                    <div value="4"></div>
+                                    <div value="3"></div>
+                                    <div value="2"></div>
+                                    <div value="1"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="task-description">
@@ -99,5 +121,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
             <script src="js/index.js"></script>
+            <script src="js/importance.js"></script>
+
         </body>
 </html>
