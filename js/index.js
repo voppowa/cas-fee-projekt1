@@ -60,12 +60,8 @@ tasks = JSON.parse(tasks);
     $(document).on('click', '.finished_notes', () => showFinished());
 
     // Edit Task
-    $(document).on('click', '.edit', () => editTask());
     $(document).on('click', '.task-text', () => editTaskDescription());
-    $(document).on('click', '.task-title > h3', () => editTaskTitle());
     $(document).on('click', '.deadline', () => editDeadline());
-    $(document).on('click', '.importance-container', () => editImportance());
-
 
 
     function changeStyle() {
@@ -110,13 +106,7 @@ tasks = JSON.parse(tasks);
         renderPageFinishedTasks();
     }
 
-    //ToDo: Edit Task
-    function editTask() {
-        console.log('clicked on edit button');
-
-    }
-
-    // Edit Deadline
+    // Edit Deadline By clicking on the date
     function editDeadline() {
         const editDeadline = event.target;
         const deadlineInput = event.target.parentNode.firstElementChild.nextElementSibling;
@@ -129,53 +119,14 @@ tasks = JSON.parse(tasks);
                 $(deadlineInput).val(editDeadline.innerHTML);
 
                 $(deadlineInput).on('keyup', function (e) {
-                    if (e.keyCode == 13) {
-                        const newDeadline = $(deadlineInput).val();
-                        tasks[index].deadline = newDeadline;
-                        $(deadlineInput).css("display", "none");
-                        $(editDeadline).show().html(newDeadline);
-                    }
+                        if (e.keyCode == 13) {
+                            const newDeadline = $(deadlineInput).val();
+                            tasks[index].deadline = newDeadline;
+                            $(deadlineInput).css("display", "none");
+                            $(editDeadline).show().html(newDeadline);
+                        }
                 });
             }
-    }
-
-    // Edit Importance
-    function editImportance() {
-        const editImportance = event.target.parentNode;
-        const importanceInput = event.target.parentNode.nextElementSibling;
-        const taskId = event.target.parentNode.parentNode.parentNode.parentNode.firstElementChild.innerHTML;
-        const index = tasks.findIndex(x => x.taskID == taskId);
-
-            if(!$(editImportance).hasClass('index_hide')) {
-                $(importanceInput).removeClass('index_hide').addClass('rating');
-                $(editImportance).hide();
-                $('.bolt').click(function () {
-                    var starId = $(this).attr('value');
-                    const newImportance = Array.from({length: starId}, (v, k) => k);
-                    tasks[index].importance = newImportance;
-                    renderPage();
-                    $('.gold div').addClass('bolt');
-                });
-        }
-    }
-
-
-
-    //Edit Title
-    function editTaskTitle() {
-        const editTaskTitle = event.target;
-        const newText = $(editTaskTitle).text();
-        const taskId = event.target.parentNode.parentNode.parentNode.firstElementChild.firstElementChild.innerHTML;
-        const index = tasks.findIndex(x => x.taskID == taskId);
-
-        $(editTaskTitle).attr('contenteditable','true').addClass('active');
-        $(".task-title > h3").on('keyup', function (e) {
-            if (e.keyCode == 13 && (newText != null)) {
-                e.preventDefault();
-                tasks[index].title = newText;
-                $(editTaskTitle).attr('contenteditable','false').removeClass('active');
-            }
-        });
     }
 
     // Edit Task Description by clicking in the field

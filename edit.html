@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link id="pagestyle" rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto:100,100i,300,300i,400,400i,500,500i,700" rel="stylesheet">
+
+    <title>Note Pro</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+</head>
+<body>
+
+<main>
+    <h3>Update Your Task</h3>
+    <form class="new_task">
+        <div>
+            <label for="title">Title<span class="required">*</span></label>
+            <input type="text" id="title" name="task_title" required>
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea id="description" name="task_description"></textarea>
+        </div>
+        <div>
+            <label for="importance">Importance<span class="required">*</span></label><br>
+            <div id="importance-wrapper"></div>
+            <div class="gold index_hide" id="importance">
+                <div value="5"></div>
+                <div value="4"></div>
+                <div value="3"></div>
+                <div value="2"></div>
+                <div value="1"></div>
+            </div>
+            <input type="hidden" id="hiddenImportance" value="" name="importance" />
+        </div>
+        <div>
+            <label for="deadline">Deadline<span class="required">*</span></label>
+            <input type="date" id="deadline" name="task_deadline" min="1979-12-31" required>
+        </div>
+        <div class="button">
+            <button id="save" class="save"><a href="index.html">Save</a></button><button class="cancel"><a href="index.html">Cancel</a></button>
+        </div>
+    </form>
+</main>
+
+<script id="importance_template" type="text/x-handlebars-template">
+        <div class="importance-container">
+        {{#importanceCount}}
+            <div class='importance-bolts'></div>
+        {{/importanceCount}}
+        </div>
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
+
+<script src="js/new.js"></script>
+<script src="js/importance.js"></script>
+<script src="js/edit.js"></script>
+
+
+</body>
+</html>
+
+
+
