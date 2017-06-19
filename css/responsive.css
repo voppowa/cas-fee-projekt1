@@ -48,8 +48,6 @@ MEDIA QUERIES
         padding: 2rem;
     }
 
-
-
 }
 
 @media (min-width: 1083px) {
@@ -57,4 +55,10 @@ MEDIA QUERIES
         width: 75%;
     }
 
+}
+
+@media (min-width: 1890px) {
+    main .task {
+        width: 50%;
+    }
 }
