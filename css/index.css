@@ -10,35 +10,50 @@ body {
     background-size: cover;
 }
 
-.change_style {
-    background: #efede0;
-}
-
 .container {
     background-color: rgba(239,237,224, 0.9);
     border-radius: 3px;
 }
+
+/*** Alt. General Style ***/
+
+.change_style {
+    background: #D4DCCD;
+}
+
+body.change_style .btn_new_task {
+    background-color: #53599A;
+}
+
+body.change_style .task-title {
+    border-top-color: #53599A;
+}
+
+body.change_style .container {
+    background-color: #D4DCCD;
+}
+
+
 
 /***************************
 Header Style
  **************************/
 
 header h1 {
-    text-transform: uppercase;
-    font-weight: 500;
     font-size: 3rem;
-    font-family: 'Lora', serif;
-}
-
-.intro{
-    font-style: italic;
-    font-weight: 200;
-    font-size: 1.1rem;
-    margin: 3rem;
+    font-family: 'Rock Salt', cursive;
 }
 
 header {
     padding: 1rem;
+}
+
+.tasks_left {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+    align-items: center;
+    margin: auto;
 }
 
 #numberOfElements {
