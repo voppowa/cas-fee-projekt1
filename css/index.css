@@ -6,19 +6,20 @@ body {
     font-family: 'Quicksand', sans-serif;
     text-align: center;
     color: dimgrey;
-    background: url(https://unsplash.it/5000/2500/?image=974);
+    background: #D4DCCD;
     background-size: cover;
 }
 
 .container {
-    background-color: rgba(239,237,224, 0.9);
+    background-color: #D4DCCD;
     border-radius: 3px;
 }
 
 /*** Alt. General Style ***/
 
 .change_style {
-    background: #D4DCCD;
+    background: url(https://unsplash.it/5000/2500/?image=974);
+
 }
 
 body.change_style .btn_new_task {
@@ -30,7 +31,8 @@ body.change_style .task-title {
 }
 
 body.change_style .container {
-    background-color: #D4DCCD;
+    background-color: rgba(239,237,224, 0.9);
+
 }
 
 
@@ -42,10 +44,7 @@ Header Style
 header h1 {
     font-size: 3rem;
     font-family: 'Rock Salt', cursive;
-}
-
-header {
-    padding: 1rem;
+    margin: 0;
 }
 
 .tasks_left {
@@ -73,7 +72,6 @@ Button Change Style & New Note
     position: absolute;
     top: 1rem;
     right: 1rem;
-    cursor: pointer;
 }
 
 .btn_change:hover {
@@ -94,7 +92,7 @@ Button Change Style & New Note
     background-color: seagreen;
 }
 
-.btn_new_task a {
+.btn_new_task {
     text-decoration: none;
     color: white;
 }
@@ -124,7 +122,6 @@ Sort Style
     padding: 0.5rem 2rem;
     margin: 0;
     border: none;
-    cursor: pointer;
 }
 
 .sort button:hover, .sort button:focus {
@@ -219,7 +216,6 @@ Tasks Style
     height: 2rem;
     width: 90%;
     margin: 0.5rem;
-    cursor: pointer;
 }
 
 .edit a {

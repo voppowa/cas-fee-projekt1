@@ -5,7 +5,6 @@ New Note Style
 main h3 {
     font-weight: 200;
     text-transform: uppercase;
-    color:white;
 }
 
 .new_task {
