@@ -170,26 +170,25 @@ Tasks Style
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 .task-title {
     border-top-color: #4ec8af;
     border-top-style: solid;
     border-top-width: 1rem;
+    text-align: left;
 }
 
 .task-title h3 {
     font-size: 1.5rem;
     font-weight: 200;
-    text-transform: uppercase;
-    color: darkslategray;
-    width: 50%;
+    width: 100%;
 }
 
 .deadline {
-    font-size: 0.9rem;
-    font-weight: 500;
     padding: 0.5rem;
+    width: 20%;
 }
 
 
@@ -214,8 +213,8 @@ Tasks Style
     background-color: darkgray;
     border: none;
     height: 2rem;
-    width: 90%;
-    margin: 0.5rem;
+    width: 100%;
+    margin: 0.75rem;
 }
 
 .edit a {
