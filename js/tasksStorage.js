@@ -1,4 +1,3 @@
-// Add new Task
 let tasks = localStorage.getItem("tasks");
 
 if( !tasks )
@@ -7,3 +6,4 @@ if( !tasks )
     tasks = localStorage.getItem("tasks");
 }
 tasks = JSON.parse(tasks);
+

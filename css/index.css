@@ -188,6 +188,14 @@ Tasks Style
     width:75%;
 }
 
+.done {
+    background-color: whitesmoke;
+}
+
+.done > .task-title {
+    border-top-color: grey;
+}
+
 .edit , .remove {
     text-transform: uppercase;
     color: white;
