@@ -27,7 +27,6 @@
     // Edit Task Title
     $(document).on('click', '.task-title > h3', function() {
         const id = $(this).parent().parent().attr('id');
-        console.log(id);
         editTaskTitle(id);
     });
 

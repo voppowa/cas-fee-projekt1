@@ -31,15 +31,13 @@ function sortByImportance(a, b) {
 function removeTask(id) {
     const index = tasks.findIndex(x => x.taskID == id);
     tasks.splice(index, 1);
-    localStorage.removeItem(tasks[index]);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
     renderPage();
 }
 
 function finishedTask(id) {
-    console.log(id)
     const index = tasks.findIndex(x => x.taskID == id);
     tasks[index].isFinished  = !tasks[index].isFinished;
-    //tasks.splice(index, 1);
     renderPage();
 }
 
@@ -52,56 +50,66 @@ function editDeadline(id, deadlineInput) {
     const editDeadline = event.target;
     const index = tasks.findIndex(x => x.taskID == id);
 
-    if(!$(editDeadline).hasClass('index_hide')){
-        $(deadlineInput).html('').show().siblings('input');
-        $(editDeadline).hide();
-        $(deadlineInput).val(editDeadline.innerHTML);
-        console.log(editDeadline.innerHTML)
+    if (!tasks[index].isFinished) {
+        if (!$(editDeadline).hasClass('index_hide')) {
+            $(deadlineInput).html('').show().siblings('input');
+            $(editDeadline).hide();
+            $(deadlineInput).val(editDeadline.innerHTML);
 
-        $(deadlineInput).on('keyup', function (e) {
-            if (e.keyCode == 13 || e.keyCode == 9) {
-                const newDeadline = $(deadlineInput).val();
-                tasks[index].deadline = newDeadline;
-                $(deadlineInput).css("display", "none");
-                $(editDeadline).show().html(newDeadline);
-            }
-        });
+            $(deadlineInput).on('keyup', function (e) {
+                if (e.keyCode == 13 || e.keyCode == 9) {
+                    const newDeadline = $(deadlineInput).val();
+                    tasks[index].deadline = newDeadline;
+                    $(deadlineInput).css("display", "none");
+                    $(editDeadline).show().html(newDeadline);
+                    localStorage.setItem('tasks', JSON.stringify(tasks));
+                }
+            });
+        }
     }
 }
 
 // Edit Task Title by clicking in the field
 function editTaskTitle(id) {
     const editTaskTitle = event.target;
-    const newText = $(editTaskTitle).text();
     const index = tasks.findIndex(x => x.taskID == id);
 
-    $(editTaskTitle).attr('contenteditable','true').addClass('active');
-    $('.task-title > h3').on('keydown', function(e) {
-        if (e.which == 13) {
-            return false;
-        }
-    });
-    $(".task-title > h3").on('keyup', function (e) {
-        if (e.keyCode == 13 || e.keyCode == 9 && (newText != null)) {
-            tasks[index].title = newText;
-            $(editTaskTitle).attr('contenteditable','false').removeClass('active');
-        }
-    });
+    if (!tasks[index].isFinished) {
+        $(editTaskTitle).attr('contenteditable', 'true').addClass('active');
+        $('.task-title > h3').on('keydown', function (e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });
+        $(".task-title > h3").on('keyup', function (e) {
+            if (e.keyCode == 13 || e.keyCode == 9 && (newText != null)) {
+                const newText = $(editTaskTitle).text();
+                tasks[index].title = newText;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                $(editTaskTitle).attr('contenteditable', 'false').removeClass('active');
+            }
+        });
+    }
 }
 
 // Edit Task Description by clicking in the field
 function editTaskDescription(id) {
     const editTaskDescription = event.target;
-    const newText = $(editTaskDescription).text();
     const index = tasks.findIndex(x => x.taskID == id);
 
-    $(editTaskDescription).attr('contenteditable','true').addClass('active');
-    $(".task-text").on('keyup', function (e) {
-        if (e.keyCode == 13 || e.keyCode == 9 && (newText != null)) {
-            tasks[index].description = newText;
-            $(editTaskDescription).attr('contenteditable','false').removeClass('active');
-        }
-    });
+    if (!tasks[index].isFinished) {
+        $(editTaskDescription).attr('contenteditable', 'true').addClass('active');
+        $(".task-text").on('keyup', function (e) {
+            if (e.keyCode == 13 || e.keyCode == 9 && (newText != null)) {
+                const newText = $(editTaskDescription).text();
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                tasks[index].description = newText;
+                $(editTaskDescription).attr('contenteditable', 'false').removeClass('active');
+                console.log(newText)
+
+            }
+        });
+    }
 }
 
 
@@ -110,17 +118,19 @@ function editImportance(id) {
     const index = tasks.findIndex(x => x.taskID == id);
     const importanceWrapper = event.target.parentNode;
     const importanceInput = event.target.parentNode.nextElementSibling;
+    if (!tasks[index].isFinished) {
+        $('.gold div').addClass('bolt');
+        $(importanceWrapper).css('display', 'none');
+        $(importanceInput).removeClass('index_hide').addClass('rating');
 
-    $('.gold div').addClass('bolt');
-    $(importanceWrapper).css('display', 'none');
-    $(importanceInput).removeClass('index_hide').addClass('rating');
-
-    if (importanceInput != null) {
-        $(importanceInput.childNodes).click(function () {
-            var starId = $(this).attr('value');
-            const newImportance = Array.from({length: starId}, (v, k) => k);
-            tasks[index].importance = newImportance;
-            renderPage();
-        });
+        if (importanceInput != null) {
+            $(importanceInput.childNodes).click(function () {
+                var starId = $(this).attr('value');
+                const newImportance = Array.from({length: starId}, (v, k) => k);
+                tasks[index].importance = newImportance;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                renderPage();
+            });
+        }
     }
 }
