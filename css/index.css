@@ -186,6 +186,10 @@ Tasks Style
     width: 100%;
 }
 
+.fa-pencil:before {
+    font-size: 1rem;
+}
+
 .deadline {
     padding: 0.5rem;
     width: 20%;

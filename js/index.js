@@ -25,21 +25,21 @@
     $(document).on('click', '.finished_notes', () => showFinished());
 
     // Edit Task Title
-    $(document).on('click', '.task-title > h3', function() {
-        const id = $(this).parent().parent().attr('id');
+    $(document).on('click', '.titleEdit', function() {
+        const id = $(this).parent().parent().parent().attr('id');
         editTaskTitle(id);
     });
 
     // Edit Task Text
-    $(document).on('click', '.task-text', function() {
-        const id = $(this).parent().parent().attr('id');
+    $(document).on('click', '.descriptionEdit', function() {
+        const id = $(this).parent().parent().parent().attr('id');
         editTaskDescription(id);
     });
 
     // Edit Task Deadline
-    $(document).on('click', '.deadline', function() {//
-        const id = $(this).parent().parent().attr('id');
-        const deadlineInput = $(this).parent().children('#deadline');
+    $(document).on('click', '.deadlineIcon', function() {//
+        const id = $(this).parent().parent().parent().attr('id');
+        const deadlineInput = $(this).parent().parent().children('#deadline');
         editDeadline(id, deadlineInput);
     });
 

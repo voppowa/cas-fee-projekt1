@@ -76,9 +76,9 @@
                 {{#unless isFinished}}
                 <li class="task" id="{{this.taskID}}">
                     <div class="task-title">
-                        <p class="deadline">{{this.deadline}}</p>
+                        <p class="deadline"><span>{{this.deadline}}</span> <i class="fa fa-sort-desc deadlineIcon" aria-hidden="true"></i></p>
                         <input type='date' id='deadline' class='index_hide' name='task_deadline' min='1979-12-31' required>
-                        <h3>{{this.title}}</h3>
+                        <h3><span>{{this.title}}</span> <i class="fa fa-pencil titleEdit" aria-hidden="true"></i></h3>
                         <div class="importance">
                             <div class="importance-container">
                                 {{#this.importance}}
@@ -98,7 +98,7 @@
                         <div class="action">
                             <button class="remove">Remove</button>
                         </div>
-                        <p class="task-text">{{this.description}}</p>
+                        <p class="task-text"> <i class="fa fa-pencil descriptionEdit" aria-hidden="true"></i> <span>{{this.description}}</span> </p>
                         <label for="finished">
                             <input type="checkbox" id="finished">
                         </label>
@@ -115,6 +115,7 @@
         <script src="js/tasksStorage.js"></script>
         <script src="js/index.js"></script>
         <script src="js/handlebar.js"></script>
+        <script src="js/shared.js"></script>
 
         </body>
 </html>

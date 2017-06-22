@@ -7,8 +7,19 @@ if( !tasks )
 }
 tasks = JSON.parse(tasks);
 
+
+function updateStorage() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
 function changeStyle() {
-    $('body').toggleClass('change_style');
+    if ($('body').hasClass("change_style")) {
+        $('body').removeClass('change_style');
+        localStorage.setItem("style", JSON.stringify("other_style"));
+    } else {
+        $('body').addClass('change_style');
+        localStorage.setItem("style", JSON.stringify("change_style"));
+    }
 }
 
 function sortAndRerender(sortAlgo) {
@@ -17,15 +28,15 @@ function sortAndRerender(sortAlgo) {
 }
 
 function sortByDeadline(a, b) {
-    return new Date(a.deadline) - new Date(b.deadline);
+    return (new Date(a.deadline) - new Date(b.deadline)) ? 1 : -1;
 }
 
 function sortByCreationDate(a, b) {
-    return new Date(a.creationDate) - new Date(b.creationDate);
+    return (new Date(a.creationDate) - new Date(b.creationDate)) ? 1 : -1;
 }
 
 function sortByImportance(a, b) {
-    return b.importance.length - a.importance.length;
+    return (b.importance.length - a.importance.length) ? 1 : -1;
 }
 
 function removeTask(id) {
@@ -47,13 +58,14 @@ function showFinished() {
 
 // Edit Deadline By clicking on the date
 function editDeadline(id, deadlineInput) {
-    const editDeadline = event.target;
+    const oldDeadline = event.target.parentNode;
+    const editDeadline = oldDeadline.firstElementChild;
     const index = tasks.findIndex(x => x.taskID == id);
 
     if (!tasks[index].isFinished) {
         if (!$(editDeadline).hasClass('index_hide')) {
             $(deadlineInput).html('').show().siblings('input');
-            $(editDeadline).hide();
+            $(oldDeadline).hide();
             $(deadlineInput).val(editDeadline.innerHTML);
 
             $(deadlineInput).on('keyup', function (e) {
@@ -61,8 +73,9 @@ function editDeadline(id, deadlineInput) {
                     const newDeadline = $(deadlineInput).val();
                     tasks[index].deadline = newDeadline;
                     $(deadlineInput).css("display", "none");
+                    $(oldDeadline).show();
                     $(editDeadline).show().html(newDeadline);
-                    localStorage.setItem('tasks', JSON.stringify(tasks));
+                    updateStorage();
                 }
             });
         }
@@ -71,21 +84,21 @@ function editDeadline(id, deadlineInput) {
 
 // Edit Task Title by clicking in the field
 function editTaskTitle(id) {
-    const editTaskTitle = event.target;
+    const editTaskTitle = event.target.parentNode.firstElementChild;
     const index = tasks.findIndex(x => x.taskID == id);
 
     if (!tasks[index].isFinished) {
         $(editTaskTitle).attr('contenteditable', 'true').addClass('active');
-        $('.task-title > h3').on('keydown', function (e) {
+        $('.task-title > h3 > span').on('keydown', function (e) {
             if (e.which == 13) {
                 return false;
             }
         });
-        $(".task-title > h3").on('keyup', function (e) {
+        $(".task-title > h3 > span").on('keyup', function (e) {
             if (e.keyCode == 13 || e.keyCode == 9 && (newText != null)) {
                 const newText = $(editTaskTitle).text();
                 tasks[index].title = newText;
-                localStorage.setItem('tasks', JSON.stringify(tasks));
+                updateStorage();
                 $(editTaskTitle).attr('contenteditable', 'false').removeClass('active');
             }
         });
@@ -94,19 +107,22 @@ function editTaskTitle(id) {
 
 // Edit Task Description by clicking in the field
 function editTaskDescription(id) {
-    const editTaskDescription = event.target;
+    const editTaskDescription = event.target.parentNode.firstElementChild.nextElementSibling;
     const index = tasks.findIndex(x => x.taskID == id);
 
     if (!tasks[index].isFinished) {
         $(editTaskDescription).attr('contenteditable', 'true').addClass('active');
-        $(".task-text").on('keyup', function (e) {
+        $('.task-text > span').on('keydown', function (e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });
+        $(".task-text > span").on('keyup', function (e) {
             if (e.keyCode == 13 || e.keyCode == 9 && (newText != null)) {
                 const newText = $(editTaskDescription).text();
-                localStorage.setItem('tasks', JSON.stringify(tasks));
+                updateStorage();
                 tasks[index].description = newText;
                 $(editTaskDescription).attr('contenteditable', 'false').removeClass('active');
-                console.log(newText)
-
             }
         });
     }
@@ -128,7 +144,7 @@ function editImportance(id) {
                 var starId = $(this).attr('value');
                 const newImportance = Array.from({length: starId}, (v, k) => k);
                 tasks[index].importance = newImportance;
-                localStorage.setItem('tasks', JSON.stringify(tasks));
+                updateStorage();
                 renderPage();
             });
         }
