@@ -3,19 +3,13 @@ MEDIA QUERIES
  **************************************/
 
 @media (min-width: 789px) {
-    /***************************
-    General Style
-     **************************/
-
+    /****General Style***/
     html .container {
         width: 75%;
-        margin: 5rem auto;
+        margin: 1rem auto;
     }
 
-    /***************************
-    Header Style
-     **************************/
-
+    /***Header Style***/
     .sort li {
         display: inline;
         margin: 0 0;
@@ -28,21 +22,13 @@ MEDIA QUERIES
 
 
 
-    /***************************
-    Tasks Style
-     **************************/
-
-
-
+    /***Tasks Style***/
      main .task {
          margin: 1rem auto;
          width: 80%;
      }
 
-     /***************************
-    New Task Style
-    **************************/
-
+     /****New Task Style***/
     main .new_task {
         width: 40%;
         padding: 2rem;
@@ -51,6 +37,7 @@ MEDIA QUERIES
 }
 
 @media (min-width: 1083px) {
+    /***General Style***/
     main .task {
         width: 75%;
     }
@@ -58,6 +45,7 @@ MEDIA QUERIES
 }
 
 @media (min-width: 1890px) {
+    /***General Style***/
     main .task {
         width: 50%;
     }

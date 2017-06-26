@@ -59,6 +59,8 @@ header h1 {
     font-size: 2rem;
 }
 
+
+
 /***************************
 Button Change Style & New Note
  **************************/
@@ -82,14 +84,14 @@ Button Change Style & New Note
     font-family: 'Quicksand', sans-serif;
     font-size: 1.25rem;
     font-weight: 200;
-    background-color: #4ec8af;
+    background-color: #6ABEA7;
     padding: 0.5rem 1.5rem;
     border-radius: 3px;
     border: none;
 }
 
 .btn_new_task:hover, .btn_new_task:focus {
-    background-color: seagreen;
+    opacity: 0.9;
 }
 
 .btn_new_task {
@@ -174,7 +176,7 @@ Tasks Style
 }
 
 .task-title {
-    border-top-color: #4ec8af;
+    border-top-color: #6ABEA7;
     border-top-style: solid;
     border-top-width: 1rem;
     text-align: left;
@@ -211,7 +213,7 @@ Tasks Style
     border-top-color: grey;
 }
 
-.edit , .remove {
+.remove {
     text-transform: uppercase;
     color: white;
     background-color: darkgray;
@@ -219,15 +221,6 @@ Tasks Style
     height: 2rem;
     width: 100%;
     margin: 0.75rem;
-}
-
-.edit a {
-    text-decoration: none;
-    color: white;
-}
-
-.edit:hover {
-    background-color: darkslategray;
 }
 
 .active {

@@ -1,5 +1,7 @@
 function renderPage() {
 
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
     const templateScript = $('#task').html(),
         handlebarTpl = Handlebars.compile(templateScript),
         context = {
@@ -22,6 +24,8 @@ function renderPage() {
 renderPage();
 
 function renderPageFinishedTasks() {
+
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
     const templateScript = $('#finished_task').html(),
         handlebarTpl = Handlebars.compile(templateScript),

@@ -16,7 +16,7 @@
             <button type="button" id="style_changer" class="btn_change">Change Style</button>
 
             <header>
-                <h1>Welcome to your To Do List</h1>
+                <h1>To Do</h1>
                 <div class="tasks_left">
                     <p>You have<div id="numberOfElements"></div>Tasks</p>
                 </div>
@@ -98,7 +98,7 @@
                         <div class="action">
                             <button class="remove">Remove</button>
                         </div>
-                        <p class="task-text"> <i class="fa fa-pencil descriptionEdit" aria-hidden="true"></i> <span>{{this.description}}</span> </p>
+                        <p class="task-text"> <span>{{this.description}}</span> <i class="fa fa-pencil descriptionEdit" aria-hidden="true"></i></p>
                         <label for="finished">
                             <input type="checkbox" id="finished">
                         </label>
@@ -113,9 +113,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
 
         <script src="js/tasksStorage.js"></script>
-        <script src="js/index.js"></script>
-        <script src="js/handlebar.js"></script>
         <script src="js/shared.js"></script>
+        <script src="js/handlebar.js"></script>
+        <script src="js/index.js"></script>
 
         </body>
 </html>

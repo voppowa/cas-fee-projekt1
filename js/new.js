@@ -1,8 +1,10 @@
 // Send new Task
+;(function ($) {
+    "use strict";
+    $(document).on('click', '#save', () => taskStorage.saveTask());
+})(jQuery);
 
-$(document).on('click', '#save', () => send());
-
-function send() {
+/***function addTask() {
 
     let addTask = function (title, description, deadline) {
 
@@ -18,14 +20,14 @@ function send() {
             'importance': Array.from({length: $("#hiddenImportance").val()}, (v, k) => k),
             'deadline': $("#deadline").val(),
             'isFinished': false
-    };
+        };
         tasks.push(newTask);
         localStorage.setItem('tasks', JSON.stringify(tasks));
     };
 
     addTask('taskID', 'creationDate', 'title', 'description', 'importance', 'deadline', 'isFinished');
     window.location.replace("index.html");
-}
+} ***/
 
 
 
