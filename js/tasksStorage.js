@@ -36,15 +36,15 @@ let taskStorage = (function() {
     }
 
     function sortByDeadline(a, b) {
-        return (new Date(a.deadline) - new Date(b.deadline)) ? 1 : -1;
+        return (new Date(a.deadline) - new Date(b.deadline));
     }
 
     function sortByCreationDate(a, b) {
-        return (new Date(a.creationDate) - new Date(b.creationDate)) ? 1 : -1;
+        return (new Date(a.creationDate) - new Date(b.creationDate));
     }
 
     function sortByImportance(a, b) {
-        return (b.importance.length - a.importance.length) ? 1 : -1;
+        return (b.importance.length - a.importance.length);
     }
 
     function removeTask(id) {
@@ -174,7 +174,7 @@ let taskStorage = (function() {
         window.location.replace("index.html");
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         tasks.push(newTask);
-        updateStorage();
+        localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
     return {
@@ -195,11 +195,5 @@ let taskStorage = (function() {
     }
 
 }());
-
-
-
-
-
-
 
 
