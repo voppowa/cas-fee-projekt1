@@ -21,7 +21,7 @@ app.get("/", function(req, res){
 });
 
 
-app.use("/tasks", require('./routes/taskRoutes.js'));
+app.use("/", require('./routes/taskRoutes.js'));
 
 
 // catch 404 and forward to error handler

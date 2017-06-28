@@ -1,5 +1,4 @@
 ;(function($) {
-    const client = window.services.restClient;
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
     $(function(){
@@ -247,32 +246,6 @@
                 }
             }
         }
-
-        //$(document).on('click', '#save', () => saveTask());
-        $('.new_task').submit(function (event) {
-            debugger;   
-            event.preventDefault();
-
-
-        //function saveTask() {
-            let title = $("#title").val();
-            let description = $("#description").val();
-            let deadline = $("#deadline").val();
-
-            let newTask = new Task(title, description, deadline);
-
-
-            client.createTask(newTask).then(x => {
-                debugger;
-                //window.location.replace("index.html");
-            });
-
-
-
-            //let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            //tasks.push(newTask);
-            //localStorage.setItem('tasks', JSON.stringify(tasks));
-        });
 
 
     });
