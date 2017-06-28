@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <link id="pagestyle" rel="stylesheet" href="css/style.css">
+            <link rel="stylesheet" href="js/libs/font-awesome-4.7.0/css/font-awesome.min.css">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Rock+Salt|Quicksand:400,500" rel="stylesheet">
+
+            <title>Note Pro</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width">
+        </head>
+
+        <body>
+        <div class="container">
+            <button type="button" id="style_changer" class="btn_change">Change Style</button>
+
+            <header>
+                <h1>To Do</h1>
+                <div class="tasks_left">
+                    <p>You have<div id="numberOfElements"></div>Tasks</p>
+                </div>
+            </header>
+
+            <a href="new.html"><button class="btn_new_task">+ New Task</button></a>
+
+            <ul class="sort">
+                <li><button class="deadlineDate">By finish Date</button></li>
+                <li><button class="creationDate">By created Date</button></li>
+                <li><button class="taskImportance">By Importance</button></li>
+                <li><button class="finished_notes">Finished</button></li>
+            </ul>
+
+            <main>
+
+                <div id="task-wrapper"></div>
+
+            </main>
+        </div>
+
+        <script id="finished_task" type="text/x-handlebars-template">
+            <ul class="tasks">
+                {{#tasks}}
+                {{#if isFinished}}
+                <li class="task done" id="{{this.taskID}}">
+                    <div class="task-title">
+                        <p class="deadline">{{this.deadline}}</p>
+                        <input type='date' id='deadline' class='index_hide' name='task_deadline' min='1979-12-31' required>
+                        <h3>{{this.title}}</h3>
+                        <div class="importance">
+                            <div class="importance-container">
+                                {{#importance}}
+                                    <div class='importance-bolts'></div>
+                                {{/importance}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-description">
+                        <div class="action">
+                            <button class="remove">Remove</button>
+                        </div>
+                        <p class="task-text">{{this.description}}</p>
+                        <label for="finished">
+                            <input type="checkbox" id="finished" checked="checked">
+                        </label>
+                    </div>
+                </li>
+                {{/if}}
+                {{/tasks}}
+            </ul>
+        </script>
+
+        <script id="task" type="text/x-handlebars-template">
+            <ul class="tasks">
+                {{#tasks}}
+                {{#unless isFinished}}
+                <li class="task" id="{{this.taskID}}">
+                    <div class="task-title">
+                        <p class="deadline"><span>{{this.deadline}}</span> <i class="fa fa-sort-desc deadlineIcon" aria-hidden="true"></i></p>
+                        <input type='date' id='deadline' class='index_hide' name='task_deadline' min='1979-12-31' required>
+                        <h3><span>{{this.title}}</span> <i class="fa fa-pencil titleEdit" aria-hidden="true"></i></h3>
+                        <div class="importance">
+                            <div class="importance-container">
+                                {{#this.importance}}
+                                    <div class='importance-bolts'></div>
+                                {{/this.importance}}
+                            </div>
+                            <div class="gold index_hide" id="importance">
+                                <div value="5"></div>
+                                <div value="4"></div>
+                                <div value="3"></div>
+                                <div value="2"></div>
+                                <div value="1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-description">
+                        <div class="action">
+                            <button class="remove">Remove</button>
+                        </div>
+                        <p class="task-text"> <span>{{this.description}}</span> <i class="fa fa-pencil descriptionEdit" aria-hidden="true"></i></p>
+                        <label for="finished">
+                            <input type="checkbox" id="finished">
+                        </label>
+                    </div>
+                </li>
+                {{/unless}}
+                {{/tasks}}
+            </ul>
+        </script>
+
+        <script src="../js/libs/jquery-3.2.1.min.js"></script>
+        <script src="../js/utils/ajaxUtil.js"></script>
+
+        <script src="../js/services/taskStorage.js"></script>
+        <script src="../js/services/restClient.js"></script>
+
+        <script src="../js/controllers/indexController.js"></script>
+
+        <script src="../js/libs/handlebars-v4.0.5.js"></script>
+
+        <!--<script src="../js/controllers/handlebar.js"></script>-->
+        <script src="../js/controllers/shared.js"></script>
+
+
+
+        </body>
+</html>
