@@ -1,29 +1,38 @@
 ;(function(services, $) {
 
     const ajaxUtil = window.util.ajax;
-    const taskStorage = window.services.taskStorage;
 
-
-    function createTask(title, description, deadline) {
-        return ajaxUtil.ajax("POST", "/tasks/", {title: title, description: description, deadline: deadline});
+    function createTask(title, description, importance, deadline) {
+        return ajaxUtil.ajax("POST", "/tasks/", {title: title, description: description, importance: importance, deadline: deadline});
     }
 
     function getTasks() {
         return ajaxUtil.ajax("GET", "/tasks/", undefined);
     }
 
-    function getTask(taskID) {
-        return ajaxUtil.ajax("GET", `/tasks/${taskID}`, undefined);
+    function getTask(id) {
+        return ajaxUtil.ajax("GET", `/tasks/${id}`, undefined);
     }
 
-    function deleteTask(taskID) {
-        return ajaxUtil.ajax("DELETE", `/tasks/${taskID}`, undefined);
+    function finishTask(id) {
+        return ajaxUtil.ajax("PUT", `/tasks/finished/${id}`, undefined);
     }
+
+    function editTask(id, title, description, importance, deadline) {
+        return ajaxUtil.ajax("PUT", `/tasks/edit/${id}`, {title: title, description: description, importance: importance, deadline: deadline});
+    }
+
+    function deleteTask(id) {
+        return ajaxUtil.ajax("DELETE", `/tasks/delete/${id}`, undefined);
+    }
+
 
     services.restClient = {
         createTask: createTask,
-        getTasks,
-        getTask,
+        editTask: editTask,
+        getTasks: getTasks,
+        getTask: getTask,
+        finishTask: finishTask,
         deleteTask
     };
 }(window.services = window.services || { }, jQuery));

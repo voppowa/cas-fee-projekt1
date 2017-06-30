@@ -74,7 +74,7 @@
             <ul class="tasks">
                 {{#tasks}}
                 {{#unless isFinished}}
-                <li class="task" id="{{this.taskID}}">
+                <li class="task" id="{{_id}}">
                     <div class="task-title">
                         <p class="deadline"><span>{{this.deadline}}</span> <i class="fa fa-sort-desc deadlineIcon" aria-hidden="true"></i></p>
                         <input type='date' id='deadline' class='index_hide' name='task_deadline' min='1979-12-31' required>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="task-description">
                         <div class="action">
-                            <button class="remove">Remove</button>
+                            <button class="remove" data-id="{{_id}}">Remove</button>
                         </div>
                         <p class="task-text"> <span>{{this.description}}</span> <i class="fa fa-pencil descriptionEdit" aria-hidden="true"></i></p>
                         <label for="finished">

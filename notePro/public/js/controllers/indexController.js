@@ -1,80 +1,171 @@
 ;(function($) {
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    //let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const client = window.services.restClient;
+
 
     $(function(){
-        function renderPage() {
+        let task_id;
 
-            const templateScript = $('#task').html(),
-                handlebarTpl = Handlebars.compile(templateScript),
-                context = {
-                    tasks
-                },
-                compiled = handlebarTpl(context);
-            $('#task-wrapper').html(compiled);
-
-            let numberTasks = 0;
-            for (let i = 0; i < tasks.length; i++) {
-                if (!tasks[i].isFinished) {
-                    numberTasks++;
-                }
-            }
-
-            $("#numberOfElements").text(numberTasks);
-
-        }
-
-        renderPage();
-
-        function renderPageFinishedTasks() {
-
-            const templateScript = $('#finished_task').html(),
-                handlebarTpl = Handlebars.compile(templateScript),
-                context = {
-                    tasks
-                },
-                compiled = handlebarTpl(context);
-            console.log(tasks);
-            $('#task-wrapper').html(compiled);
-
-            let numberTasks = 0;
-            for (let i = 0; i < tasks.length; i++) {
-                if (!tasks[i].isFinished) {
-                    numberTasks++;
-                }
-            }
-
-            $("#numberOfElements").text(numberTasks);
-
-        }
-
+        renderTasks();
 
         // Style Changer
         $(document).on('click', '#style_changer', () => changeStyle());
 
-        // Sort Functions
-        $(document).on('click', '.deadlineDate', () => sortAndRerender(sortByDeadline));
-        $(document).on('click', '.creationDate', () => sortAndRerender(sortByCreationDate));
-        $(document).on('click', '.taskImportance', () => sortAndRerender(sortByImportance));
-
-        // Remove Task
-        $(document).on('click', '.remove', function() {
-            const id = $(this).parent().parent().parent().attr('id');
-            removeTask(id);
-        });
-
-        $(document).on('click', '#finished', function() {
-            const id = $(this).parent().parent().parent().attr('id');
-            finishedTask(id);
-        });
-
         // Show Finished
         $(document).on('click', '.finished_notes', () => showFinished());
 
+        // Task finished
+        $(document).on('click', '#finished', function() {
+            task_id = $(this).parents(".task").attr("id");
+            finishTask(task_id);
+        });
+
+        // Sort Functions
+        $(document).on('click', '.deadlineDate', function() {
+            $('button.deadlineDate').toggleClass('active');
+            renderTasks(sortByDeadline);
+        });
+        $(document).on('click', '.creationDate', function() {
+            $('button.creationDate').toggleClass('active');
+            renderTasks(sortByCreationDate);
+        });
+        $(document).on('click', '.taskImportance', function() {
+            $('button.taskImportance').toggleClass('active');
+            renderTasks(sortByImportance);
+        });
+
         // Edit Task Title
         $(document).on('click', '.titleEdit', function() {
-            const id = $(this).parent().parent().parent().attr('id');
-            editTaskTitle(id);
+            const task_id = $(this).parents(".task").attr("id");
+            editTaskTitle(task_id);
         });
+
+        const tasksContainer = $("#task-wrapper");
+
+        const tasksRenderer = Handlebars.compile($("#task").html());
+        const finishedTasks = Handlebars.compile($("#finished_task").html());
+
+        function renderTasks(sortAlgo)
+        {
+            client.getTasks().done(function(tasks){
+                tasks.sort(sortAlgo);
+                tasksContainer.html(tasksRenderer({tasks : tasks}));
+
+                let numberTasks = 0;
+                for (let i = 0; i < tasks.length; i++) {
+                    if (!tasks[i].isFinished) {
+                        numberTasks++;
+                    }
+                }
+                $("#numberOfElements").text(numberTasks);
+
+            })
+        }
+
+
+        function renderfinishedTasks()
+        {
+            client.getTasks().done(function(tasks){
+                tasksContainer.html(finishedTasks({tasks : tasks}));
+
+                let numberTasks = 0;
+                for (let i = 0; i < tasks.length; i++) {
+                    if (!tasks[i].isFinished) {
+                        numberTasks++;
+                    }
+                }
+
+                $("#numberOfElements").text(numberTasks);
+
+            })
+        }
+
+        function changeStyle() {
+            if ($('body').hasClass("change_style")) {
+                $('body').removeClass('change_style');
+                localStorage.setItem("style", JSON.stringify("other_style"));
+            } else {
+                $('body').addClass('change_style');
+                localStorage.setItem("style", JSON.stringify("change_style"));
+            }
+        }
+
+        function showFinished() {
+            renderfinishedTasks()
+        }
+
+
+        function finishTask() {
+            client.finishTask(task_id);
+            renderTasks();
+        }
+
+        function sortByDeadline(a, b) {
+            if ($('button.deadlineDate').hasClass('active')) {
+                return (new Date(b.deadline) - new Date(a.deadline))
+            } else {
+                return (new Date(a.deadline) - new Date(b.deadline));
+            }
+        }
+
+        function sortByCreationDate(a, b) {
+            if ($('button.creationDate').hasClass('active')) {
+                return (new Date(a.creationDate) - new Date(b.creationDate));
+            } else {
+                return (new Date(b.creationDate) - new Date(a.creationDate));
+            }
+        }
+
+        function sortByImportance(a, b) {
+            if ($('button.taskImportance').hasClass('active')) {
+                return (b.importance.length - a.importance.length);
+            } else {
+                return (a.importance.length - b.importance.length);
+            }
+        }
+
+
+        // Edit Task Title by clicking on the icon
+        function editTaskTitle(task_id) {
+            let editTaskTitle = event.target.parentNode.firstElementChild;
+            let description;
+            let importance;
+            let deadline;
+
+
+
+            $('.titleEdit').hide();
+            $(editTaskTitle).attr('contenteditable', 'true').addClass('active');
+
+            $('.task-title > h3 > span').on('keydown', function (e) {
+                if (e.which == 13) {
+                    return false;
+                }
+            });
+
+            $(".task-title > h3 > span").on('keyup', function (e) {
+                if (e.keyCode == 13 || e.keyCode == 9 && newText != null) {
+                    $(editTaskTitle).attr('contenteditable', 'false').removeClass('active');
+                    let newTitle = $(editTaskTitle).text();
+                    $('.titleEdit').show();
+                    console.log(task_id)
+                    client.editTask(task_id, newTitle, description, importance, deadline);
+                }
+            });
+        }
+
+
+        // Remove Task
+
+       // $(document).on('click', '.remove', function() {
+        //    const id = $(this).parent().parent().parent().attr('id');
+          //  removeTask(id);
+       // });
+
+        $(tasksContainer).on("click", ".remove", function(event){
+            client.deleteTask($(event.currentTarget).data("id")).done(renderTasks);
+        });
+
 
         // Edit Task Text
         $(document).on('click', '.descriptionEdit', function() {
@@ -95,57 +186,16 @@
             editImportance(id);
         });
 
-        function updateStorage() {
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
 
-        function changeStyle() {
-            if ($('body').hasClass("change_style")) {
-                $('body').removeClass('change_style');
-                localStorage.setItem("style", JSON.stringify("other_style"));
-            } else {
-                $('body').addClass('change_style');
-                localStorage.setItem("style", JSON.stringify("change_style"));
-            }
-        }
+        //function removeTask(id) {
+        //   const index = tasks.findIndex(x => x.taskID == id);
+        //   tasks.splice(index, 1);
+        //   updateStorage();
+        //   renderPage();
+        //}
 
 
 
-        function sortAndRerender(sortAlgo) {
-            tasks.sort(sortAlgo);
-            updateStorage();
-            renderPage();
-        }
-
-        function sortByDeadline(a, b) {
-            return (new Date(a.deadline) - new Date(b.deadline));
-        }
-
-        function sortByCreationDate(a, b) {
-            return (new Date(a.creationDate) - new Date(b.creationDate));
-        }
-
-        function sortByImportance(a, b) {
-            return (b.importance.length - a.importance.length);
-        }
-
-        function removeTask(id) {
-           const index = tasks.findIndex(x => x.taskID == id);
-           tasks.splice(index, 1);
-           updateStorage();
-           renderPage();
-        }
-
-        function finishedTask(id) {
-            const index = tasks.findIndex(x => x.taskID == id);
-            tasks[index].isFinished  = !tasks[index].isFinished;
-            updateStorage();
-            renderPage();
-        }
-
-        function showFinished() {
-            renderPageFinishedTasks();
-        }
 
 // Edit Deadline By clicking on the icon
         function editDeadline(id, deadlineInput) {
@@ -172,31 +222,7 @@
             }
         }
 
-// Edit Task Title by clicking on the icon
-        function editTaskTitle(id) {
-            const editTaskTitle = event.target.parentNode.firstElementChild;
-            const index = tasks.findIndex(x => x.taskID == id);
 
-            $('.titleEdit').hide();
-
-            if (!tasks[index].isFinished) {
-                $(editTaskTitle).attr('contenteditable', 'true').addClass('active');
-                $('.task-title > h3 > span').on('keydown', function (e) {
-                    if (e.which == 13) {
-                        return false;
-                    }
-                });
-                $(".task-title > h3 > span").on('keyup', function (e) {
-                    if (e.keyCode == 13 || e.keyCode == 9 && newText != null) {
-                        const newText = $(editTaskTitle).text();
-                        tasks[index].title = newText;
-                        updateStorage();
-                        $(editTaskTitle).attr('contenteditable', 'false').removeClass('active');
-                        $('.titleEdit').show();
-                    }
-                });
-            }
-        }
 
 // Edit Task Description by clicking on the icon
         function editTaskDescription(id) {

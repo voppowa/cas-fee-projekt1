@@ -1,72 +1,38 @@
 // Send new Task
 ;(function ($) {
-    "use strict";
-    const client = window.services.restClient;
+    const client = window.services.restClient
 
-    class Task {
-        constructor(title, description, deadline) {
-            this.taskID = (new Date).getTime();
-            this.creationDate = new Date();
-            this.title = title;
-            this.description = description;
-            this.deadline = deadline;
-            this.importance = Array.from({length: $("#hiddenImportance").val()}, (v, k) => k);
-            this.isFinished = false;
-        }
+    // Set Today as Default Value for Deadline
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1;
+
+    let yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd;
     }
-    //$(document).on('click', '#save', () => saveTask());
+    if(mm<10){
+        mm='0'+mm;
+    }
+    today = yyyy+'-'+mm+'-'+dd;
+    $("#deadline").attr("value", today);
+
+    // Create new Task
     $('.new_task').submit(function (event) {
         event.preventDefault();
 
-
-        //function saveTask() {
         let title = $("#title").val();
-        let description = $("#description").val();
+        let description = $("#description").val() || "Nothing";
+        let importance = Array.from({length: $("#hiddenImportance").val() || 1}, (v, k) => k);
         let deadline = $("#deadline").val();
 
-        let newTask = new Task(title, description, deadline);
-        console.log(newTask);
-
-
-        client.createTask(newTask).then(x => {
-            debugger;
-            //window.location.replace("index.html");
+        client.createTask(title, description, importance, deadline).then(x => {
+            window.location.replace("index.html");
         });
-
-
-
-        //let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        //tasks.push(newTask);
-        //localStorage.setItem('tasks', JSON.stringify(tasks));
     });
 
 
 })(jQuery);
-
-/***function addTask() {
-
-    let addTask = function (title, description, deadline) {
-
-        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        let creationDate = new Date();
-        let taskID = (new Date).getTime();
-
-        let newTask = {
-            'taskID': taskID,
-            'creationDate': creationDate,
-            'title': $("#title").val(),
-            'description': $("#description").val(),
-            'importance': Array.from({length: $("#hiddenImportance").val()}, (v, k) => k),
-            'deadline': $("#deadline").val(),
-            'isFinished': false
-        };
-        tasks.push(newTask);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    };
-
-    addTask('taskID', 'creationDate', 'title', 'description', 'importance', 'deadline', 'isFinished');
-    window.location.replace("index.html");
-} ***/
 
 
 

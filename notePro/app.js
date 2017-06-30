@@ -17,11 +17,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //app.use('/', index);
 
 app.get("/", function(req, res){
-    res.sendFile("/html/index.html",  {root: __dirname + '/public/'});
+    res.sendFile("/html/index.",  {root: __dirname + '/public/'});
 });
 
 
 app.use("/", require('./routes/taskRoutes.js'));
+app.use("/tasks", require('./routes/taskRoutes.js'));
 
 
 // catch 404 and forward to error handler
