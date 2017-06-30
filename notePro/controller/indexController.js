@@ -24,16 +24,9 @@ module.exports.finishTask = function(req, res) {
     });
 };
 
-module.exports.deleteTask =  function (req, res)
-{
-    store.delete(req.params.id, function(err, task) {
+module.exports.getTask = function(req, res){
+    store.get(req.params.id, function(err, task) {
         res.json(task);
     });
 };
 
-
-module.exports.getTask = function(req, res) {
-    store.get(req.params.id, function(err, task) {
-        res.json(task);
-    })
-}

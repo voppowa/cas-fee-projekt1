@@ -42,7 +42,7 @@ function publicRemove(id, callback) {
 
 
 function publicAll(callback) {
-    db.find({}).sort({}).exec(function (err, docs) {
+    db.find({}, function (err, docs) {
         callback( err, docs);
     });
 }

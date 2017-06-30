@@ -3,7 +3,7 @@
     const ajaxUtil = window.util.ajax;
 
     function createTask(title, description, importance, deadline) {
-        return ajaxUtil.ajax("POST", "/tasks/", {title: title, description: description, importance: importance, deadline: deadline});
+        return ajaxUtil.ajax("POST", "/tasks/create/", {title: title, description: description, importance: importance, deadline: deadline});
     }
 
     function getTasks() {

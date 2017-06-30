@@ -1,3 +1,17 @@
-{"creationDate":{"$$date":1498838004670},"isFinished":false,"_id":"GQlEJnwi2ePSNGhn"}
-{"creationDate":{"$$date":1498837908351},"title":"Test","description":"dsaf sdaf dsaf","deadline":"2017-07-02","importance":[0,1,2],"isFinished":false,"_id":"tZsVp9MGw3l7Wzoi"}
-{"creationDate":{"$$date":1498838004670},"isFinished":false,"_id":"GQlEJnwi2ePSNGhn","title":"sdafsad fsdaf 3"}
+{"creationDate":{"$$date":1498852194022},"title":"New Task","description":" sadfdsfdsf","deadline":"2017-06-30","importance":[0,1,2],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852203583},"title":"Another Task","description":"askldfj sdlafsdf sdg","deadline":"2017-07-01","importance":[0],"isFinished":false,"_id":"whywVfvhvvaMgE8S"}
+{"creationDate":{"$$date":1498852194022},"title":"New Tasks","description":" sadfdsfdsf","deadline":"2017-06-30","importance":[0,1,2],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852194022},"title":"New Tasks TESSST","description":" sadfdsfdsf","deadline":"2017-06-30","importance":[0,1,2],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852194022},"title":"New Tasks TESSST","description":" sadfdsfdsf","deadline":"2017-06-25","importance":[0,1,2],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852194022},"title":"New Tasks TEST","description":" sadfdsfdsf","deadline":"2017-06-25","importance":[0,1,2],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852194022},"title":"New Tasks TEEEESSST","description":" sadfdsfdsf","deadline":"2017-06-25","importance":[0,1,2],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852194022},"title":"New Tasks TEEEESSST","description":" Testing Adding another Text","deadline":"2017-06-25","importance":[0,1,2],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852203583},"title":"Another Task","description":"askldfj sdlafsdf sdg","deadline":"2017-07-30","importance":[0],"isFinished":false,"_id":"whywVfvhvvaMgE8S"}
+{"creationDate":{"$$date":1498852203583},"title":"Another Task","description":"askldfj sdlafsdf sdg","deadline":"2017-07-30","importance":[0,1,2,3,4],"isFinished":false,"_id":"whywVfvhvvaMgE8S"}
+{"creationDate":{"$$date":1498852194022},"title":"New Tasks TEEEESSST","description":" Testing Adding another Text","deadline":"2017-06-25","importance":[0],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852194022},"title":"New Tasks TEEEESSST","description":" Testing Adding another Text","deadline":"2017-06-25","importance":[0,1,2],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852203583},"title":"Another Task","description":"askldfj sdlafsdf sdg","deadline":"2017-07-30","importance":[0],"isFinished":false,"_id":"whywVfvhvvaMgE8S"}
+{"creationDate":{"$$date":1498852203583},"title":"Another Task","description":"askldfj sdlafsdf sdg","deadline":"2017-07-30","importance":[0,1,2,3,4],"isFinished":false,"_id":"whywVfvhvvaMgE8S"}
+{"creationDate":{"$$date":1498852203583},"title":"Another Task","description":"Testing Another Task","deadline":"2017-07-30","importance":[0,1,2,3,4],"isFinished":false,"_id":"whywVfvhvvaMgE8S"}
+{"creationDate":{"$$date":1498852194022},"title":"New Task","description":" Testing Adding another Text","deadline":"2017-06-25","importance":[0,1,2],"isFinished":false,"_id":"j2IB2J4bssPROXrU"}
+{"creationDate":{"$$date":1498852194022},"title":"New Task","description":" Testing Adding another Text","deadline":"2017-06-25","importance":[0,1,2],"isFinished":true,"_id":"j2IB2J4bssPROXrU"}

@@ -21,7 +21,7 @@ app.get("/", function(req, res){
 });
 
 
-app.use("/", require('./routes/taskRoutes.js'));
+app.use("/", require('./routes/indexRoutes.js'));
 app.use("/tasks", require('./routes/taskRoutes.js'));
 
 
