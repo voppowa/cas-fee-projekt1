@@ -23,7 +23,7 @@
     }
 
     function deleteTask(id) {
-        return ajaxUtil.ajax("DELETE", `/tasks/delete/${id}`, undefined);
+        return ajaxUtil.ajax("DELETE", `/tasks/${id}`, undefined);
     }
 
 

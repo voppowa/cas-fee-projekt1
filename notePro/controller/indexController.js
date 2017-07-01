@@ -30,3 +30,9 @@ module.exports.getTask = function(req, res){
     });
 };
 
+module.exports.deleteTask =  function (req, res)
+{
+    store.delete(req.params.id, function(err, task) {
+        res.json(task);
+    });
+};

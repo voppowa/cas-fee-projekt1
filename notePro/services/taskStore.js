@@ -35,8 +35,8 @@ function publicGet(id, callback) {
 }
 
 function publicRemove(id, callback) {
-    db.update({}, {}, {}, function (err, count) {
-        publicGet(id, callback);
+    db.remove({_id: id}, {}, function (err, numRemoved) {
+        callback( err, numRemoved);
     });
 }
 

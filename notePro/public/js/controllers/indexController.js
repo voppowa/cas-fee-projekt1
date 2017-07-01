@@ -5,6 +5,10 @@
 
     $(function(){
         let task_id;
+        const tasksContainer = $("#task-wrapper");
+
+        const tasksRenderer = Handlebars.compile($("#task").html());
+        const finishedTasks = Handlebars.compile($("#finished_task").html());
 
         renderTasks();
 
@@ -12,12 +16,13 @@
         $(document).on('click', '#style_changer', () => changeStyle());
 
         // Show Finished
-        $(document).on('click', '.finished_notes', () => showFinished());
+        $(document).on('click', '.finished_notes', () => renderfinishedTasks());
 
         // Task finished
         $(document).on('click', '#finished', function() {
             task_id = $(this).parents(".task").attr("id");
-            finishTask(task_id);
+            client.finishTask(task_id);
+            renderTasks();
         });
 
         // Sort Functions
@@ -59,10 +64,10 @@
             editImportance(task_id);
         });
 
-        const tasksContainer = $("#task-wrapper");
-
-        const tasksRenderer = Handlebars.compile($("#task").html());
-        const finishedTasks = Handlebars.compile($("#finished_task").html());
+        // Remove Task
+        $(tasksContainer).on("click", ".remove", function(event){
+            client.deleteTask($(event.currentTarget).data("id")).done(renderTasks);
+        });
 
         function renderTasks(sortAlgo)
         {
@@ -106,16 +111,6 @@
                 $('body').addClass('change_style');
                 localStorage.setItem("style", JSON.stringify("change_style"));
             }
-        }
-
-        function showFinished() {
-            renderfinishedTasks()
-        }
-
-
-        function finishTask() {
-            client.finishTask(task_id);
-            renderTasks();
         }
 
         function sortByDeadline(a, b) {
@@ -162,7 +157,7 @@
                     }
                 });
                 $(".task-title > h3 > span").on('keyup', function (e) {
-                    if (e.keyCode == 13 || e.keyCode == 9 && newText != null) {
+                    if (e.keyCode == 13) {
                         $(editTaskTitle).attr('contenteditable', 'false').removeClass('active');
                         let newTitle = $(editTaskTitle).text();
                         $('.titleEdit').show();
@@ -176,6 +171,7 @@
         // Edit Task Description by clicking on the icon
         function editTaskDescription(task_id) {
             const editTaskDescription = event.target.parentNode.firstElementChild;
+
             client.getTask(task_id).done(function(task) {
 
                 let title = task.title;
@@ -191,7 +187,7 @@
                     }
                 });
                 $(".task-text > span").on('keyup', function (e) {
-                    if (e.keyCode == 13 || e.keyCode == 9 && (newText != null)) {
+                    if (e.keyCode == 13) {
                         const newText = $(editTaskDescription).text();
                         $(editTaskDescription).attr('contenteditable', 'false').removeClass('active');
                         $('.descriptionEdit').show();
@@ -255,25 +251,6 @@
                 }
             });
         }
-
-
-        // Remove Task
-
-       // $(document).on('click', '.remove', function() {
-        //    const id = $(this).parent().parent().parent().attr('id');
-          //  removeTask(id);
-       // });
-
-        $(tasksContainer).on("click", ".remove", function(event){
-            client.deleteTask($(event.currentTarget).data("id")).done(renderTasks);
-        });
-
-        //function removeTask(id) {
-        //   const index = tasks.findIndex(x => x.taskID == id);
-        //   tasks.splice(index, 1);
-        //   updateStorage();
-        //   renderPage();
-        //}
 
     });
 }(jQuery));
