@@ -18,8 +18,7 @@ body {
 /*** Alt. General Style ***/
 
 .change_style {
-    background: url(https://unsplash.it/5000/2500/?image=974);
-
+    background: rgba(239,237,224, 0.9);
 }
 
 body.change_style .btn_new_task {
@@ -146,9 +145,6 @@ button.finished_notes:hover, button.finished_notes:focus {
 /***************************
 Tasks Style
  **************************/
-.uniqueID {
-    display: none;
-}
 
 .index_hide {
     display: none;

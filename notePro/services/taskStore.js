@@ -22,10 +22,10 @@ function publicAddTask(title, description, importance, deadline, callback) {
     });
 }
 
-function editTask(id, title, description, importance, deadline, callback) {
-    db.update({_id: id}, {$set: {"title": title, "description": description, "importance": importance, "deadline": deadline}}, {}, function (err, newDoc) {
-        callback(err, newDoc);
-    })
+function publicAll(callback) {
+    db.find({}, function (err, docs) {
+        callback( err, docs);
+    });
 }
 
 function publicGet(id, callback) {
@@ -34,17 +34,10 @@ function publicGet(id, callback) {
     });
 }
 
-function publicRemove(id, callback) {
-    db.remove({_id: id}, {}, function (err, numRemoved) {
-        callback( err, numRemoved);
-    });
-}
-
-
-function publicAll(callback) {
-    db.find({}, function (err, docs) {
-        callback( err, docs);
-    });
+function editTask(id, title, description, importance, deadline, callback) {
+    db.update({_id: id}, {$set: {"title": title, "description": description, "importance": importance, "deadline": deadline}}, {}, function (err, newDoc) {
+        callback(err, newDoc);
+    })
 }
 
 function finishTask(id, callback) {
@@ -53,11 +46,17 @@ function finishTask(id, callback) {
     })
 }
 
+function publicRemove(id, callback) {
+    db.remove({_id: id}, {}, function (err, numRemoved) {
+        callback( err, numRemoved);
+    });
+}
+
 module.exports = {
     add : publicAddTask,
-    edit: editTask,
-    delete : publicRemove,
-    get : publicGet,
     all : publicAll,
-    finish: finishTask
+    get : publicGet,
+    edit: editTask,
+    finish: finishTask,
+    delete : publicRemove
 };

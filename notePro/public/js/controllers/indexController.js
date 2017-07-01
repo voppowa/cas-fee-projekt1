@@ -1,7 +1,5 @@
 ;(function($) {
-    //let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const client = window.services.restClient;
-
 
     $(function(){
         let task_id;
@@ -10,7 +8,7 @@
         const tasksRenderer = Handlebars.compile($("#task").html());
         const finishedTasks = Handlebars.compile($("#finished_task").html());
 
-        renderTasks();
+        renderTasks(sortByCreationDate);
 
         // Style Changer
         $(document).on('click', '#style_changer', () => changeStyle());
@@ -52,7 +50,7 @@
         });
 
         // Edit Task Deadline
-        $(document).on('click', '.deadlineIcon', function() {//
+        $(document).on('click', '.deadlineIcon', function() {
             const task_id = $(this).parents(".task").attr("id");
             const deadlineInput = $(this).parent().parent().children('#deadline');
             editDeadline(task_id, deadlineInput);
@@ -65,16 +63,14 @@
         });
 
         // Remove Task
-        $(tasksContainer).on("click", ".remove", function(event){
+        $(tasksContainer).on("click", ".remove", function(event) {
             client.deleteTask($(event.currentTarget).data("id")).done(renderTasks);
         });
 
-        function renderTasks(sortAlgo)
-        {
-            client.getTasks().done(function(tasks){
+        function renderTasks(sortAlgo) {
+            client.getTasks().done(function(tasks) {
                 tasks.sort(sortAlgo);
                 tasksContainer.html(tasksRenderer({tasks : tasks}));
-
                 let numberTasks = 0;
                 for (let i = 0; i < tasks.length; i++) {
                     if (!tasks[i].isFinished) {
@@ -82,24 +78,19 @@
                     }
                 }
                 $("#numberOfElements").text(numberTasks);
-
             })
         }
 
-        function renderfinishedTasks()
-        {
-            client.getTasks().done(function(tasks){
+        function renderfinishedTasks() {
+            client.getTasks().done(function(tasks) {
                 tasksContainer.html(finishedTasks({tasks : tasks}));
-
                 let numberTasks = 0;
                 for (let i = 0; i < tasks.length; i++) {
                     if (!tasks[i].isFinished) {
                         numberTasks++;
                     }
                 }
-
                 $("#numberOfElements").text(numberTasks);
-
             })
         }
 
@@ -140,7 +131,7 @@
 
         // Edit Task Title by clicking on the icon
         function editTaskTitle(task_id) {
-            let editTaskTitle = event.target.parentNode.firstElementChild;
+            const editTaskTitle = event.target.parentNode.firstElementChild;
 
             client.getTask(task_id).done(function(task) {
 
