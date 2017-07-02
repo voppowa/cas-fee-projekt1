@@ -2,3 +2,5 @@
 {"creationDate":{"$$date":1498993185696},"title":"Task Nr 2","description":"The Description of Task Number 2","deadline":"2017-08-05","importance":[0,1,2,3],"isFinished":false,"_id":"iKL29k06JBLXs6MO"}
 {"creationDate":{"$$date":1498993167832},"title":"Task Nr 1","description":"The Description of Task Number 1","deadline":"2017-07-28","importance":[0,1],"isFinished":false,"_id":"vnrnLrbCWggp7YYg"}
 {"creationDate":{"$$date":1498993200871},"title":"Task Nr 3","description":"The Description of Task Number 3","deadline":"2017-07-02","importance":[0,1,2,3,4],"isFinished":false,"_id":"z6HQeLopux6UhOTz"}
+{"$$deleted":true,"_id":"z6HQeLopux6UhOTz"}
+{"creationDate":{"$$date":1498995484357},"title":"Task Number 5","description":"The Description of Task Number 5","deadline":"2017-07-02","importance":[0,1,2,3],"isFinished":false,"_id":"NPgOhJaBECXKLW0T"}
