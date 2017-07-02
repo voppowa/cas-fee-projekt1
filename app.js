@@ -1,5 +1,4 @@
 const express = require('express');
-const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -13,10 +12,8 @@ app.get("/", function(req, res){
     res.sendFile("/html/index.",  {root: __dirname + '/public/'});
 });
 
-
 app.use("/", require('./routes/indexRoutes.js'));
 app.use("/tasks", require('./routes/taskRoutes.js'));
-
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

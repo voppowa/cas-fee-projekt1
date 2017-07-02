@@ -2,7 +2,6 @@
 <html>
     <head>
         <link id="pagestyle" rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto:100,100i,300,300i,400,400i,500,500i,700" rel="stylesheet">
 
@@ -37,20 +36,20 @@
             </div>
             <div>
                 <label for="deadline">Deadline<span class="required">*</span></label>
-                <input type="date" id="deadline" name="task_deadline" min="1979-12-31" required>
+                <input type="date" id="deadline" name="task_deadline" required>
             </div>
             <div class="button">
-                <button id="save" class="save"><a href="index.html">Save</a></button>
+                <button id="save" type="submit">Save</button>
                 <a href="index.html"><button class="cancel">Cancel</button></a>
             </div>
         </form>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/tasksStorage.js"></script>
-    <script src="js/shared.js"></script>
-    <script src="js/new.js"></script>
-    <script src="js/importance.js"></script>
+    <script src="../js/libs/jquery-3.2.1.min.js"></script>
+    <script src="../js/utils/ajaxUtil.js"></script>
+    <script src="../js/services/restClient.js"></script>
+    <script src="../js/controllers/newController.js"></script>
+    <script src="../js/controllers/shared.js"></script>
 
     </body>
 </html>

@@ -39,26 +39,26 @@
 
         // Edit Task Title
         $(document).on('click', '.titleEdit', function() {
-            const task_id = $(this).parents(".task").attr("id");
+            task_id = $(this).parents(".task").attr("id");
             editTaskTitle(task_id);
         });
 
         // Edit Task Text
         $(document).on('click', '.descriptionEdit', function() {
-            const task_id = $(this).parents(".task").attr("id");
+            task_id = $(this).parents(".task").attr("id");
             editTaskDescription(task_id);
         });
 
         // Edit Task Deadline
         $(document).on('click', '.deadlineIcon', function() {
-            const task_id = $(this).parents(".task").attr("id");
+            task_id = $(this).parents(".task").attr("id");
             const deadlineInput = $(this).parent().parent().children('#deadline');
             editDeadline(task_id, deadlineInput);
         });
 
         // Edit Task Importance
         $(document).on('click', '.importance', function() {
-            const task_id = $(this).parent().parent().attr('id');
+            task_id = $(this).parent().parent().attr('id');
             editImportance(task_id);
         });
 
